@@ -99,7 +99,40 @@ def login_view(request):
 
         request.session["student_email"] = email
 
-        return HttpResponse("Login successful!")
+        return redirect("login_loading")
 
     # This handles GET requests
     return render(request, "login.html")
+
+#= = = Dashboard = = =#
+def dashboard(request):
+
+    email = request.session.get("student_email")
+
+    if not email:
+        return redirect("login")
+
+    with connection.cursor() as cursor:
+
+        cursor.execute(
+            """
+            SELECT Full_Name
+            FROM Student
+            WHERE Email = %s
+            """,
+            [email]
+        )
+
+        student = cursor.fetchone()
+
+    if student is None:
+        return redirect("login")
+
+    full_name = student[0]
+
+    return render(request, "dashboard.html", {
+        "full_name": full_name
+    })
+
+def login_loading(request):
+    return render(request, "loading.html")
