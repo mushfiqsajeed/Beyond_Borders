@@ -1,16 +1,15 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Beyond Borders</title>
-        <link rel="icon" type="image/png" href="{% static 'Logo_favicon.png' %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond Borders</title>
+    <link rel="icon" type="image/png" href="{% static 'Logo_favicon.png' %}">
 
         <link rel="stylesheet" href="{% static 'style.css' %}">
     </head>
-    <body>
+    <body style="background-color: #ecf2fe;">
         <!-- Hero Section -->
         <section class="hero">
             <video autoplay muted playsinline>
@@ -19,21 +18,95 @@
 
         </section>
 
-        <section class="about">
+    <section class="about" >
 
-            <h2>Your Journey to Studying Abroad Starts Here</h2>
-            <hr>
+            <div class="about-intro">
+                <h2>Your Journey to Studying Abroad Starts Here</h2>
 
-            <p>
-                Discover scholarships, compare universities,
-                estimate costs, and receive personalized recommendations.
-            </p>
+                <hr>
 
-        </section>
+                <p>
+                    Discover scholarships, compare universities,
+                    estimate costs, and receive personalized recommendations.
+                </p>
+            </div>
 
+            <h2 class="features-title">Features</h2>
 
+            <div class="features-container">
+
+                <div class="feature-card">
+                    <h3>🔍 Find Scholarships</h3>
+                    <p>
+                        Search scholarships by country, university,
+                        degree level, or field of study.
+                    </p>
+                </div>
+
+            <div class="feature-card">
+                <h3>🏛 Compare Universities</h3>
+                <p>
+                    Compare tuition fees, rankings, scholarships,
+                    living costs, and more.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📄 Admission Requirements</h3>
+                <p>
+                    Find eligibility criteria, required documents,
+                    CGPA requirements, and entrance exams in one place.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>💰 Estimate Study Costs</h3>
+                <p>
+                    Calculate your expected tuition and living
+                    expenses before applying.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📅 Never Miss Deadlines</h3>
+                <p>
+                    Track scholarship and university application
+                    deadlines with ease.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📑 Document Review</h3>
+                <p>
+                    Get professional feedback on your SOP, CV,
+                    and LOR before submission.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="workflow-section">
+        <div class="container">
+            <img src="{% static 'journey_workflow.png' %}" 
+                alt="Your Journey to Study Abroad" 
+                class="workflow-img">
+        </div>
+    </section>
+
+    <section class="login_part">
+        <div class="login-cta-container">
+            <h2>Ready to Take Your Education Beyond Borders?</h2>
+            <p>Create your free account today to unlock personalized scholarship recommendations, compare top universities, and track your applications.</p>
+            
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Join Us / Sign Up</a>
+                <a href="#" class="btn btn-outline">Already Have an Account? Log In</a>
+            </div>
+        </div>
+    </section>
 
     </body>
-
     
 </html>
