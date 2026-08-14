@@ -82,8 +82,15 @@ WSGI_APPLICATION = 'Beyond_Borders.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Beyond_Borders',  # Updated to match our phpMyAdmin DB name
+        'USER': 'root',           # Default XAMPP username
+        'PASSWORD': '',           # XAMPP has no password by default
+        'HOST': '127.0.0.1',      # Connects directly to XAMPP local server
+        'PORT': '3306',           # Default MySQL/MariaDB port
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
 
