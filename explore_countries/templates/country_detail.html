@@ -1,0 +1,246 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ country.country_name }} - Beyond Borders</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+
+            background-image: url("{% static 'background_image_worldMap.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 16px;
+
+            background-color: #1f2937;
+            color: white;
+
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .country-header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .country-header h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .country-header p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .section h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .section p {
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        .cost-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .cost-card {
+            background: #f5f7fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .cost-card h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .cost-card p {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <a href="{% url 'explore_countries' %}" class="back-button">
+        ← Back to Countries
+    </a>
+
+
+    <!-- Country Header -->
+
+    <div class="country-header">
+
+        <h1>{{ country.country_name }}</h1>
+
+        <p>
+            Explore important information about studying and living
+            in {{ country.country_name }}.
+        </p>
+
+    </div>
+
+
+    <!-- Student Experience -->
+
+    <div class="section">
+
+        <h2>🎓 Student Experience</h2>
+
+        <p>
+            {{ country.student_lifestyle }}
+        </p>
+
+        <br>
+
+        <p>
+            <strong>Climate:</strong>
+            {{ country.climate }}
+        </p>
+
+    </div>
+
+
+    <!-- Visa Information -->
+
+    <div class="section">
+
+        <h2>🛂 Visa Information</h2>
+
+        <p>
+            {{ country.visa_information }}
+        </p>
+
+    </div>
+
+
+    <!-- Work Opportunities -->
+
+    <div class="section">
+
+        <h2>💼 Work Opportunities</h2>
+
+        <p>
+            {{ country.work_opportunities }}
+        </p>
+
+    </div>
+
+
+    <!-- Healthcare -->
+
+    <div class="section">
+
+        <h2>🏥 Healthcare</h2>
+
+        <p>
+            {{ country.healthcare_info }}
+        </p>
+
+    </div>
+
+
+    <!-- Cost of Living -->
+
+    <div class="section">
+
+        <h2>💰 Cost of Living</h2>
+
+        <div class="cost-grid">
+
+
+            <div class="cost-card">
+
+                <h3>🏠 Accommodation</h3>
+
+                <p>
+                    ${{ country.accommodation_cost }}
+                </p>
+
+            </div>
+
+
+            <div class="cost-card">
+
+                <h3>🛒 Groceries</h3>
+
+                <p>
+                    ${{ country.grocery_cost }}
+                </p>
+
+            </div>
+
+
+            <div class="cost-card">
+
+                <h3>🚌 Transportation</h3>
+
+                <p>
+                    ${{ country.transportation_cost }}
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>
