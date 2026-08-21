@@ -1,0 +1,950 @@
+/* =========================================================
+   BEYOND BORDERS DASHBOARD
+   ========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 255px;
+    height: 100vh;
+
+    background: linear-gradient(
+        180deg,
+        #12478d,
+        #0e376e
+    );
+
+    color: white;
+
+    padding: 18px 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    /*
+       Prevent the sidebar itself from becoming
+       independently scrollable.
+    */
+
+    overflow: hidden;
+
+    z-index: 1000;
+
+    transition: width 0.3s ease;
+}
+
+
+/* =========================================================
+   SIDEBAR HEADER
+   ========================================================= */
+
+.sidebar-header {
+
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 10px;
+
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.12);
+
+    margin-bottom: 18px;
+
+}
+
+
+.sidebar-brand {
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+
+}
+
+
+.sidebar-brand img {
+
+    width: 36px;
+    height: 36px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+
+}
+
+
+.brand-text {
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    transition:
+        opacity 0.2s ease,
+        width 0.3s ease;
+
+}
+
+
+/* =========================================================
+   OUTSIDE HAMBURGER BUTTON
+   ========================================================= */
+
+.sidebar-toggle {
+
+    position: fixed;
+
+    top: 20px;
+
+    left: 255px;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    border-radius:
+        0 8px 8px 0;
+
+    background: #12478d;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    z-index: 1100;
+
+    transition:
+        left 0.3s ease,
+        background 0.2s ease;
+
+}
+
+
+.sidebar-toggle:hover {
+
+    background: #0e376e;
+
+}
+
+
+/* =========================================================
+   SIDEBAR SECTIONS
+   ========================================================= */
+
+.sidebar-section {
+
+    margin-bottom: 18px;
+
+}
+
+
+.sidebar-title {
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    color:
+        rgba(255, 255, 255, 0.55);
+
+    margin:
+        0 10px 6px;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   SIDEBAR LINKS
+   ========================================================= */
+
+.sidebar-link {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 9px 12px;
+
+    margin-bottom: 3px;
+
+    border-radius: 8px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.sidebar-link:hover {
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    transform:
+        translateX(3px);
+
+}
+
+
+.sidebar-link.active {
+
+    background:
+        rgba(255, 255, 255, 0.18);
+
+}
+
+
+.sidebar-icon {
+
+    width: 22px;
+
+    flex-shrink: 0;
+
+    text-align: center;
+
+    font-size: 17px;
+
+}
+
+
+.sidebar-text {
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    transition:
+        opacity 0.2s ease;
+
+}
+
+
+/* =========================================================
+   COLLAPSED SIDEBAR
+   ========================================================= */
+
+.sidebar.collapsed {
+
+    width: 75px;
+
+}
+
+
+.sidebar.collapsed .brand-text,
+.sidebar.collapsed .sidebar-text {
+
+    opacity: 0;
+
+    width: 0;
+
+}
+
+
+.sidebar.collapsed .sidebar-title {
+
+    display: none;
+
+}
+
+
+.sidebar.collapsed .sidebar-link {
+
+    justify-content: center;
+
+    gap: 0;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
+
+.sidebar.collapsed .sidebar-link:hover {
+
+    transform: none;
+
+}
+
+
+/* Move hamburger when sidebar collapses */
+
+body.sidebar-collapsed .sidebar-toggle {
+
+    left: 75px;
+
+}
+
+
+/* =========================================================
+   DASHBOARD MAIN CONTENT
+   ========================================================= */
+
+.dashboard-content {
+
+    margin-left: 255px;
+
+    min-height: 100vh;
+
+    padding:
+        0 45px 60px;
+
+    background: #f5f7fb;
+
+    transition:
+        margin-left 0.3s ease;
+
+}
+
+
+body.sidebar-collapsed
+.dashboard-content {
+
+    margin-left: 75px;
+
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.topbar {
+
+    height: 75px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom:
+        1px solid #dce3ee;
+
+}
+
+
+.topbar-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+
+.about-link {
+
+    color: #52627a;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+.about-link:hover {
+
+    color: #12478d;
+
+}
+
+
+.logout-button {
+
+    display: inline-block;
+
+    padding:
+        10px 18px;
+
+    border-radius: 8px;
+
+    background: #12478d;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.logout-button:hover {
+
+    background: #0e376e;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* =========================================================
+   WELCOME SECTION
+   ========================================================= */
+
+.welcome-section {
+
+    padding:
+        45px 0 28px;
+
+}
+
+
+.welcome-section h1 {
+
+    margin: 0 0 8px;
+
+    color: #1d2d5c;
+
+    font-size: 34px;
+
+    font-weight: 700;
+
+}
+
+
+.welcome-section p {
+
+    margin: 0;
+
+    color: #657895;
+
+    font-size: 16px;
+
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+   ========================================================= */
+
+.summary-cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.summary-card {
+
+    background: white;
+
+    border:
+        1px solid #dce3ee;
+
+    border-radius: 15px;
+
+    padding: 24px;
+
+    min-height: 180px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(30, 60, 100, 0.05);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.summary-card:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(30, 60, 100, 0.09);
+
+}
+
+
+/* =========================================================
+   CARD TOP
+   ========================================================= */
+
+.card-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+}
+
+
+.card-label {
+
+    margin: 0 0 5px;
+
+    color: #63738e;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+.summary-card h2 {
+
+    margin: 0;
+
+    color: #1c2d60;
+
+    font-size: 30px;
+
+}
+
+
+.card-icon {
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #edf3ff;
+
+    font-size: 22px;
+
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+   ========================================================= */
+
+.progress-bar {
+
+    width: 100%;
+
+    height: 8px;
+
+    margin:
+        18px 0 15px;
+
+    border-radius: 10px;
+
+    background: #e4ebf5;
+
+    overflow: hidden;
+
+}
+
+
+.progress-fill {
+
+    width: 20%;
+
+    height: 100%;
+
+    border-radius: 10px;
+
+    background: #3475c4;
+
+}
+
+
+/* =========================================================
+   CARD DESCRIPTION
+   ========================================================= */
+
+.card-description {
+
+    margin:
+        25px 0 18px;
+
+    color: #667994;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   CARD LINK
+   ========================================================= */
+
+.card-link {
+
+    color: #12519b;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+.card-link:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+   ========================================================= */
+
+.quick-actions {
+
+    margin-top: 42px;
+
+}
+
+
+.section-heading h2 {
+
+    margin: 0 0 5px;
+
+    color: #1d2d5c;
+
+    font-size: 25px;
+
+}
+
+
+.section-heading p {
+
+    margin: 0 0 22px;
+
+    color: #687a96;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================================
+   ACTION GRID
+   ========================================================= */
+
+.action-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+}
+
+
+/* =========================================================
+   ACTION CARD
+   ========================================================= */
+
+.action-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    padding: 20px;
+
+    background: white;
+
+    border:
+        1px solid #dce3ee;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 5px 18px
+        rgba(30, 60, 100, 0.04);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.action-card:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(30, 60, 100, 0.08);
+
+}
+
+
+/* =========================================================
+   ACTION ICON
+   ========================================================= */
+
+.action-icon {
+
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #edf3ff;
+
+    font-size: 22px;
+
+}
+
+
+/* =========================================================
+   ACTION CONTENT
+   ========================================================= */
+
+.action-content {
+
+    flex: 1;
+
+}
+
+
+.action-content h3 {
+
+    margin:
+        0 0 5px;
+
+    color: #1d2d5c;
+
+    font-size: 16px;
+
+}
+
+
+.action-content p {
+
+    margin: 0;
+
+    color: #657895;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   ACTION ARROW
+   ========================================================= */
+
+.action-arrow {
+
+    color: #3475c4;
+
+    font-size: 20px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .summary-cards {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .sidebar {
+
+        width: 75px;
+
+    }
+
+
+    .brand-text,
+    .sidebar-text,
+    .sidebar-title {
+
+        display: none;
+
+    }
+
+
+    .sidebar-link {
+
+        justify-content: center;
+
+    }
+
+
+    .sidebar-toggle {
+
+        left: 75px;
+
+    }
+
+
+    .dashboard-content {
+
+        margin-left: 75px;
+
+        padding-left: 25px;
+
+        padding-right: 25px;
+
+    }
+
+
+    .summary-cards {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .action-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .welcome-section h1 {
+
+        font-size: 28px;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .dashboard-content {
+
+        padding:
+            0 18px 40px;
+
+    }
+
+
+    .topbar {
+
+        height: 65px;
+
+    }
+
+
+    .about-link {
+
+        display: none;
+
+    }
+
+
+    .welcome-section {
+
+        padding-top: 30px;
+
+    }
+
+
+    .welcome-section h1 {
+
+        font-size: 24px;
+
+    }
+
+}
