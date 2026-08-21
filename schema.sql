@@ -84,7 +84,7 @@ CREATE TABLE Saved_Scholarship (
 CREATE TABLE Standardized_Test (
     Email VARCHAR(255),
     Test_Name VARCHAR(100),
-    Score DECIMAL(5,2),
+    Score DECIMAL(6,2),
     PRIMARY KEY (Email, Test_Name),
     FOREIGN KEY (Email) REFERENCES Student(Email) ON DELETE CASCADE
 );

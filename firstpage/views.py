@@ -136,3 +136,7 @@ def dashboard(request):
 
 def login_loading(request):
     return render(request, "loading.html")
+
+def logout_view(request):
+    request.session.flush()
+    return redirect('/')
