@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sessions',
     'firstpage',
+    'explore_scholarships',
     'debug_toolbar'
 ]
 
