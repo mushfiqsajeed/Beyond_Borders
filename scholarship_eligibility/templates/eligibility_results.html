@@ -1,0 +1,787 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Eligibility Results</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="{% static 'Logo_favicon.png' %}"
+    >
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+
+            background-image: url("{% static 'background_image_worldMap.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+
+            color: #222;
+        }
+
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+
+        /* ---------------------------------- */
+        /* HEADER */
+        /* ---------------------------------- */
+
+        h1 {
+            margin-bottom: 8px;
+        }
+
+
+        .intro {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+
+        .back-button {
+            display: inline-block;
+
+            padding: 10px 18px;
+
+            margin-bottom: 30px;
+
+            background-color: white;
+
+            color: #333;
+
+            text-decoration: none;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+        }
+
+
+        .back-button:hover {
+            background-color: #f3f4f6;
+        }
+
+
+        /* ---------------------------------- */
+        /* SUMMARY */
+        /* ---------------------------------- */
+
+        .summary {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .summary-card {
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 2px 8px
+                rgba(0, 0, 0, 0.08);
+
+            text-align: center;
+        }
+
+
+        .summary-number {
+            font-size: 30px;
+
+            font-weight: bold;
+
+            margin-bottom: 5px;
+        }
+
+
+        .summary-label {
+            color: #666;
+
+            font-size: 14px;
+        }
+
+
+        /* ---------------------------------- */
+        /* RESULT SECTIONS */
+        /* ---------------------------------- */
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+
+        .section-title {
+            font-size: 22px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* ---------------------------------- */
+        /* SCHOLARSHIP CARD */
+        /* ---------------------------------- */
+
+        .scholarship-card {
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 24px;
+
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 2px 8px
+                rgba(0, 0, 0, 0.08);
+        }
+
+
+        .scholarship-name {
+            font-size: 20px;
+
+            font-weight: bold;
+
+            margin-bottom: 6px;
+        }
+
+
+        .university {
+            color: #666;
+
+            margin-bottom: 18px;
+        }
+
+
+        .details {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .detail {
+            background: #f8f9fa;
+
+            padding: 12px;
+
+            border-radius: 8px;
+        }
+
+
+        .detail-label {
+            font-size: 12px;
+
+            color: #777;
+
+            margin-bottom: 4px;
+        }
+
+
+        .detail-value {
+            font-weight: bold;
+        }
+
+
+        /* ---------------------------------- */
+        /* REQUIREMENTS */
+        /* ---------------------------------- */
+
+        .requirements {
+            margin-top: 20px;
+        }
+
+
+        .requirements h3 {
+            font-size: 16px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .requirements ul {
+            margin-top: 0;
+
+            padding-left: 22px;
+        }
+
+
+        .requirements li {
+            margin-bottom: 7px;
+        }
+
+
+        .passed {
+            color: #287a3e;
+        }
+
+
+        .missing {
+            color: #a66a00;
+        }
+
+
+        .failed {
+            color: #b42318;
+        }
+
+
+        /* ---------------------------------- */
+        /* EMPTY STATE */
+        /* ---------------------------------- */
+
+        .no-results {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            color: #666;
+        }
+
+
+        /* ---------------------------------- */
+        /* RESPONSIVE */
+        /* ---------------------------------- */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 20px;
+            }
+
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ---------------------------------- -->
+    <!-- HEADER -->
+    <!-- ---------------------------------- -->
+
+    <h1>🎓 Your Eligibility Results</h1>
+
+    <p class="intro">
+        Based on the information you provided,
+        here are the scholarships that best match your profile.
+    </p>
+
+
+    <a
+        href="{% url 'scholarship_eligibility' %}"
+        class="back-button"
+    >
+        ← Check Again
+    </a>
+
+
+    <!-- ---------------------------------- -->
+    <!-- SUMMARY -->
+    <!-- ---------------------------------- -->
+
+    <div class="summary">
+
+
+        <div class="summary-card">
+
+            <div class="summary-number">
+                {{ eligible|length }}
+            </div>
+
+            <div class="summary-label">
+                🟢 Likely Eligible
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-number">
+                {{ possible|length }}
+            </div>
+
+            <div class="summary-label">
+                🟡 Possible
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-number">
+                {{ not_eligible|length }}
+            </div>
+
+            <div class="summary-label">
+                🔴 Not Eligible
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================================== -->
+    <!-- LIKELY ELIGIBLE -->
+    <!-- ================================== -->
+
+    {% if eligible %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+            🟢 Likely Eligible
+        </h2>
+
+
+        {% for scholarship in eligible %}
+
+        <div class="scholarship-card">
+
+
+            <div class="scholarship-name">
+                {{ scholarship.Scholarship_Name }}
+            </div>
+
+
+            <div class="university">
+                {{ scholarship.university_name }}
+                {% if scholarship.country_name %}
+                    · {{ scholarship.country_name }}
+                {% endif %}
+            </div>
+
+
+            <div class="details">
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Degree Level
+                    </div>
+
+                    <div class="detail-value">
+                        {{ scholarship.Degree_level }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Scholarship Amount
+                    </div>
+
+                    <div class="detail-value">
+                        ${{ scholarship.Amount|floatformat:2 }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Application Deadline
+                    </div>
+
+                    <div class="detail-value">
+                        {{ scholarship.Application_deadline }}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            {% if scholarship.passed_requirements %}
+
+            <div class="requirements">
+
+                <h3>
+                    Requirements you meet
+                </h3>
+
+                <ul>
+
+                    {% for requirement in scholarship.passed_requirements %}
+
+                    <li class="passed">
+                        ✓ {{ requirement }}
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- ================================== -->
+    <!-- POSSIBLE -->
+    <!-- ================================== -->
+
+    {% if possible %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+            🟡 Possible
+        </h2>
+
+
+        {% for scholarship in possible %}
+
+        <div class="scholarship-card">
+
+
+            <div class="scholarship-name">
+                {{ scholarship.Scholarship_Name }}
+            </div>
+
+
+            <div class="university">
+                {{ scholarship.university_name }}
+                {% if scholarship.country_name %}
+                    · {{ scholarship.country_name }}
+                {% endif %}
+            </div>
+
+
+            <div class="details">
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Degree Level
+                    </div>
+
+                    <div class="detail-value">
+                        {{ scholarship.Degree_level }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Scholarship Amount
+                    </div>
+
+                    <div class="detail-value">
+                        ${{ scholarship.Amount|floatformat:2 }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Application Deadline
+                    </div>
+
+                    <div class="detail-value">
+                        {{ scholarship.Application_deadline }}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            {% if scholarship.passed_requirements %}
+
+            <div class="requirements">
+
+                <h3>
+                    Requirements you meet
+                </h3>
+
+                <ul>
+
+                    {% for requirement in scholarship.passed_requirements %}
+
+                    <li class="passed">
+                        ✓ {{ requirement }}
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            {% endif %}
+
+
+            {% if scholarship.missing_requirements %}
+
+            <div class="requirements">
+
+                <h3>
+                    What still needs to be checked
+                </h3>
+
+                <ul>
+
+                    {% for requirement in scholarship.missing_requirements %}
+
+                    <li class="missing">
+                        ⚠ {{ requirement }}
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- ================================== -->
+    <!-- NOT ELIGIBLE -->
+    <!-- ================================== -->
+
+    {% if not_eligible %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+            🔴 Not Eligible
+        </h2>
+
+
+        {% for scholarship in not_eligible %}
+
+        <div class="scholarship-card">
+
+
+            <div class="scholarship-name">
+                {{ scholarship.Scholarship_Name }}
+            </div>
+
+
+            <div class="university">
+                {{ scholarship.university_name }}
+                {% if scholarship.country_name %}
+                    · {{ scholarship.country_name }}
+                {% endif %}
+            </div>
+
+
+            <div class="details">
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Degree Level
+                    </div>
+
+                    <div class="detail-value">
+                        {{ scholarship.Degree_level }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Scholarship Amount
+                    </div>
+
+                    <div class="detail-value">
+                        ${{ scholarship.Amount|floatformat:2 }}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Application Deadline
+                    </div>
+
+                    <div class="detail-value">
+                        {{ scholarship.Application_deadline }}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            {% if scholarship.passed_requirements %}
+
+            <div class="requirements">
+
+                <h3>
+                    Requirements you meet
+                </h3>
+
+                <ul>
+
+                    {% for requirement in scholarship.passed_requirements %}
+
+                    <li class="passed">
+                        ✓ {{ requirement }}
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            {% endif %}
+
+
+            {% if scholarship.failed_requirements %}
+
+            <div class="requirements">
+
+                <h3>
+                    Requirements not met
+                </h3>
+
+                <ul>
+
+                    {% for requirement in scholarship.failed_requirements %}
+
+                    <li class="failed">
+                        ✗ {{ requirement }}
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- ================================== -->
+    <!-- NO RESULTS -->
+    <!-- ================================== -->
+
+    {% if not eligible and not possible and not not_eligible %}
+
+    <div class="no-results">
+
+        <h2>
+            No scholarships found
+        </h2>
+
+        <p>
+            We couldn't find scholarships matching
+            the information you provided.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+
+</div>
+
+
+</body>
+
+</html>
