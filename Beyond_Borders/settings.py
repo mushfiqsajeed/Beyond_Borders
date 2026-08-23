@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sessions',
     'firstpage',
-    'debug_toolbar'
+    'debug_toolbar',
+    'user_profile'
 ]
 
 MIDDLEWARE = [
