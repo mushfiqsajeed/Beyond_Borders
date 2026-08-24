@@ -171,7 +171,8 @@ def dashboard(request):
 
     return render(request, "dashboard.html", {
         "full_name": full_name,
-        "profile_completion": profile_completion
+        "profile_completion": profile_completion,
+        "active_page": "dashboard"
     })
 
 

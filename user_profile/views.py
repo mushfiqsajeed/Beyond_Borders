@@ -98,6 +98,7 @@ def profile(request):
         "tests": tests,
 
         "profile_completion": profile_completion,
+        "active_page": "profile",
     })
 
 def edit_profile(request):
@@ -114,7 +115,7 @@ def edit_profile(request):
         phone = request.POST.get("phone")
         current_institution = request.POST.get("current_institution")
         current_degree = request.POST.get("current_degree")
-        cgpa = request.POST.get("cgpa")
+        cgpa = request.POST.get("cgpa") or None
         degree_level_sought = request.POST.get("degree_level_sought")
         field_of_study = request.POST.get("field_of_study")
 

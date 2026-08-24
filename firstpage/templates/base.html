@@ -1,0 +1,182 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+
+    <!-- =====================================================
+         PAGE TITLE
+         ===================================================== -->
+
+    <title>
+        {% block title %}
+            Beyond Borders
+        {% endblock %}
+    </title>
+
+
+    <!-- =====================================================
+         FAVICON
+         ===================================================== -->
+
+    <link rel="icon"
+          type="image/png"
+          href="{% static 'Logo_favicon.png' %}">
+
+
+    <!-- =====================================================
+         PAGE-SPECIFIC CSS
+         ===================================================== -->
+
+
+{% block page_css %}
+{% endblock %}
+
+
+<!-- =====================================================
+     SHARED BACKGROUND
+     ===================================================== -->
+
+    <style>
+
+        html {
+            min-height: 100%;
+
+            background-image:
+                url("{% static 'background_image_worldMap.jpg' %}");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+
+        body {
+            min-height: 100vh;
+            background: transparent !important;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="{% block body_class %}{% endblock %}">
+
+
+    <!-- =====================================================
+         SHARED SIDEBAR
+         ===================================================== -->
+
+    {% include "sidebar.html" %}
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="{% block main_class %}dashboard-content{% endblock %}">
+
+
+        <!-- =================================================
+             SHARED TOP BAR
+             ================================================= -->
+
+        <header class="topbar">
+
+            <div></div>
+
+            <div class="topbar-actions">
+
+                <a
+                    href="https://github.com/mushfiqsajeed/Beyond_Borders/blob/main/README.md"
+                    class="about-link"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    About Us
+
+                </a>
+
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="logout-button">
+
+                    Logout
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             PAGE-SPECIFIC CONTENT
+             ================================================= -->
+
+        {% block content %}
+        {% endblock %}
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         SHARED SIDEBAR JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        const toggleButton =
+            document.getElementById("sidebar-toggle");
+
+
+        if (sidebar && toggleButton) {
+
+            toggleButton.addEventListener(
+                "click",
+                function () {
+
+                    sidebar.classList.toggle(
+                        "collapsed"
+                    );
+
+                    document.body.classList.toggle(
+                        "sidebar-collapsed"
+                    );
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+    <!-- =====================================================
+         PAGE-SPECIFIC JAVASCRIPT
+         ===================================================== -->
+
+    {% block extra_js %}
+    {% endblock %}
+
+
+</body>
+
+</html>

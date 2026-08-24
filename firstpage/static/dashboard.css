@@ -305,7 +305,7 @@ body.sidebar-collapsed
     padding:
         0 45px 60px;
 
-    background: #f5f7fb;
+    background: transparent;
 
     transition:
         margin-left 0.3s ease;

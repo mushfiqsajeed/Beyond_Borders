@@ -1,62 +1,81 @@
+{% extends "base.html" %}
+
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
+{% block title %}
+    My Profile | Beyond Borders
+{% endblock %}
 
-    <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>My Profile | Beyond Borders</title>
-
-    <link rel="icon"
-          type="image/png"
-          href="{% static 'Logo_favicon.png' %}">
+{% block page_css %}
 
     <link rel="stylesheet"
           href="{% static 'profile.css' %}">
 
-</head>
+{% endblock %}
 
 
-<body class="profile-page">
+{% block body_class %}
+profile-page
+{% endblock %}
 
 
-    <!-- =====================================================
-         SIDEBAR TOGGLE
-         ===================================================== -->
+{% block main_class %}
+profile-content
+{% endblock %}
 
-    <button
-        class="sidebar-toggle"
-        id="sidebar-toggle"
-        type="button"
-        aria-label="Toggle sidebar">
 
-        ☰
-
-    </button>
+{% block content %}
 
 
     <!-- =====================================================
-         SIDEBAR
+         PAGE HEADING
          ===================================================== -->
 
-    <aside class="sidebar" id="sidebar">
+    <section class="page-heading">
+
+        <h1>
+            My Profile
+        </h1>
+
+        <p>
+            Manage your personal and academic information.
+        </p>
+
+    </section>
 
 
-        <div class="sidebar-header">
 
-            <div class="sidebar-brand">
+    <!-- =====================================================
+         PROFILE HEADER
+         ===================================================== -->
 
-                <img
-                    src="{% static 'Logo_favicon.png' %}"
-                    alt="Beyond Borders Logo">
+    <section class="profile-header-card">
 
-                <span class="brand-text">
-                    Beyond Borders
+
+        <!-- Profile Photo + Identity -->
+
+        <div class="profile-identity">
+
+            <img
+                src="{% static 'default_profile.jpeg' %}"
+                alt="Profile Photo"
+                class="profile-avatar">
+
+
+            <div class="identity-info">
+
+                <h2>
+                    {{ full_name }}
+                </h2>
+
+                <p class="profile-email">
+                    {{ email }}
+                </p>
+
+                <span class="member-badge">
+                    Beyond Borders Member
                 </span>
 
             </div>
@@ -64,230 +83,178 @@
         </div>
 
 
-        <a href="{% url 'dashboard' %}"
-           class="sidebar-link">
 
-            <span class="sidebar-icon">🏠</span>
-            <span class="sidebar-text">Dashboard</span>
+        <!-- Profile Completion -->
 
-        </a>
+        <div class="profile-completion">
 
+            <div class="completion-header">
 
-        <a href="#"
-           class="sidebar-link">
+                <span>
+                    Profile Completion
+                </span>
 
-            <span class="sidebar-icon">🌎</span>
-            <span class="sidebar-text">Explore Countries</span>
+                <strong>
+                    {{ profile_completion }}%
+                </strong>
 
-        </a>
-
-
-        <a href="#"
-           class="sidebar-link">
-
-            <span class="sidebar-icon">🎓</span>
-            <span class="sidebar-text">Explore University</span>
-
-        </a>
+            </div>
 
 
-        <a href="#"
-           class="sidebar-link">
+            <div class="completion-bar">
 
-            <span class="sidebar-icon">💰</span>
-            <span class="sidebar-text">Explore Scholarships</span>
+                <div
+                    class="completion-fill"
+                    style="width: {{ profile_completion }}%;">
+                </div>
 
-        </a>
-
-
-        <a href="#"
-           class="sidebar-link">
-
-            <span class="sidebar-icon">✅</span>
-            <span class="sidebar-text">Scholarship Eligibility</span>
-
-        </a>
+            </div>
 
 
-        <a href="#"
-           class="sidebar-link">
+            {% if profile_completion == 100 %}
 
-            <span class="sidebar-icon">📋</span>
-            <span class="sidebar-text">Admission Requirement</span>
+                <p class="completion-success">
+                    Congratulations on completing your profile!
+                </p>
 
-        </a>
+            {% else %}
 
+                <p class="completion-note">
+                    Complete your profile to get more relevant recommendations.
+                </p>
 
-        <a href="#"
-           class="sidebar-link">
+            {% endif %}
 
-            <span class="sidebar-icon">🧮</span>
-            <span class="sidebar-text">Cost Estimator</span>
+        </div>
 
-        </a>
-
-
-        <a href="#"
-           class="sidebar-link">
-
-            <span class="sidebar-icon">📄</span>
-            <span class="sidebar-text">Document Review</span>
-
-        </a>
-
-
-        <a href="#"
-           class="sidebar-link">
-
-            <span class="sidebar-icon">🔖</span>
-            <span class="sidebar-text">Saved</span>
-
-        </a>
-
-
-        <a href="#"
-           class="sidebar-link active">
-
-            <span class="sidebar-icon">👤</span>
-            <span class="sidebar-text">Profile</span>
-
-        </a>
-
-    </aside>
+    </section>
 
 
 
     <!-- =====================================================
-         MAIN CONTENT
+         EDIT PROFILE FORM
          ===================================================== -->
 
-    <main class="profile-content">
+    <form
+        method="POST"
+        action="{% url 'edit_profile' %}"
+        class="profile-form">
 
-
-        <!-- TOP BAR -->
-
-        <header class="topbar">
-
-            <div></div>
-
-            <div class="topbar-actions">
-
-                <a
-                    href="https://github.com/mushfiqsajeed/Beyond_Borders/blob/main/README.md"
-                    class="about-link"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    About Us
-
-                </a>
-
-
-                <a
-                    href="{% url 'logout' %}"
-                    class="logout-button">
-
-                    Logout
-
-                </a>
-
-            </div>
-
-        </header>
+        {% csrf_token %}
 
 
 
-        <!-- =====================================================
-             PAGE HEADING
-             ===================================================== -->
+        <!-- =================================================
+             PERSONAL INFORMATION
+             ================================================= -->
 
-        <section class="page-heading">
-
-            <h1>
-                My Profile
-            </h1>
-
-            <p>
-                Manage your personal and academic information.
-            </p>
-
-        </section>
+        <section class="profile-section">
 
 
+            <div class="section-heading">
 
-        <!-- =====================================================
-             PROFILE HEADER
-             ===================================================== -->
+                <div class="section-icon">
+                    👤
+                </div>
 
-        <section class="profile-header-card">
-
-
-            <!-- Profile Photo + Identity -->
-
-            <div class="profile-identity">
-
-                <img
-                    src="{% static 'default_profile.jpeg' %}"
-                    alt="Profile Photo"
-                    class="profile-avatar">
-
-
-                <div class="identity-info">
+                <div>
 
                     <h2>
-                        {{ full_name }}
+                        Personal Information
                     </h2>
 
-                    <p class="profile-email">
-                        {{ email }}
+                    <p>
+                        Your basic personal details.
                     </p>
-
-                    <span class="member-badge">
-                        Beyond Borders Member
-                    </span>
 
                 </div>
 
             </div>
 
 
-            <!-- Profile Completion -->
 
-            <div class="profile-completion">
+            <div class="form-grid">
 
-                <div class="completion-header">
 
-                    <span>
-                        Profile Completion
-                    </span>
+                <!-- Full Name -->
 
-                    <strong>{{ profile_completion }}%</strong>
+                <div class="form-group">
+
+                    <label for="full_name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="full_name"
+                        name="full_name"
+                        value="{{ full_name }}"
+                        placeholder="Enter your full name"
+                        required>
 
                 </div>
 
 
-                <div class="completion-bar">
 
-                    <div class="completion-fill"
-                        style="width: {{ profile_completion }}%;">
-                    </div>
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value="{{ email }}"
+                        readonly>
+
+                    <small>
+                        Email is used as your account identifier.
+                    </small>
 
                 </div>
 
 
-                {% if profile_completion == 100 %}
 
-                    <p class="completion-success">
-                        Congratulations on completing your profile!
-                    </p>
+                <!-- Phone -->
 
-                {% else %}
+                <div class="form-group">
 
-                    <p class="completion-note">
-                        Complete your profile to get more relevant recommendations.
-                    </p>
+                    <label for="phone">
+                        Phone
+                    </label>
 
-                {% endif %}
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value="{{ phone }}"
+                        placeholder="Enter your phone number">
+
+                </div>
+
+
+
+                <!-- Nationality -->
+
+                <div class="form-group">
+
+                    <label for="nationality">
+                        Nationality
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nationality"
+                        name="nationality"
+                        value="{{ nationality }}"
+                        placeholder="Enter your nationality">
+
+                </div>
+
 
             </div>
 
@@ -295,291 +262,316 @@
 
 
 
-        <!-- =====================================================
-             EDIT PROFILE FORM
-             ===================================================== -->
+        <!-- =================================================
+             ACADEMIC INFORMATION
+             ================================================= -->
+
+        <section class="profile-section">
+
+
+            <div class="section-heading">
+
+                <div class="section-icon">
+                    🎓
+                </div>
+
+                <div>
+
+                    <h2>
+                        Academic Information
+                    </h2>
+
+                    <p>
+                        Tell us about your academic background
+                        and study goals.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-grid">
+
+
+                <!-- Current Institution -->
+
+                <div class="form-group full-width">
+
+                    <label for="current_institution">
+                        Current Institution
+                    </label>
+
+                    <input
+                        type="text"
+                        id="current_institution"
+                        name="current_institution"
+                        value="{{ current_institution }}"
+                        placeholder="e.g. BRAC University">
+
+                </div>
+
+
+
+                <!-- Current Degree -->
+
+                <div class="form-group">
+
+                    <label for="current_degree">
+                        Current Degree
+                    </label>
+
+                    <input
+                        type="text"
+                        id="current_degree"
+                        name="current_degree"
+                        value="{{ current_degree }}"
+                        placeholder="e.g. BSc in Computer Science">
+
+                </div>
+
+
+
+                <!-- CGPA -->
+
+                <div class="form-group">
+
+                    <label for="cgpa">
+                        CGPA
+                    </label>
+
+                    <input
+                        type="number"
+                        id="cgpa"
+                        name="cgpa"
+                        value="{{ cgpa }}"
+                        placeholder="e.g. 3.75"
+                        min="0"
+                        max="4"
+                        step="0.01">
+
+                </div>
+
+
+
+                <!-- Degree Level Sought -->
+
+                <div class="form-group">
+
+                    <label for="degree_level_sought">
+                        Degree Level Sought
+                    </label>
+
+                    <select
+                        id="degree_level_sought"
+                        name="degree_level_sought">
+
+                        <option value="">
+                            Select degree level
+                        </option>
+
+                        <option
+                            value="Bachelor's"
+                            {% if degree_level_sought == "Bachelor's" %}
+                                selected
+                            {% endif %}>
+                            Bachelor's
+                        </option>
+
+                        <option
+                            value="Master's"
+                            {% if degree_level_sought == "Master's" %}
+                                selected
+                            {% endif %}>
+                            Master's
+                        </option>
+
+                        <option
+                            value="PhD"
+                            {% if degree_level_sought == "PhD" %}
+                                selected
+                            {% endif %}>
+                            PhD
+                        </option>
+
+                        <option
+                            value="Diploma"
+                            {% if degree_level_sought == "Diploma" %}
+                                selected
+                            {% endif %}>
+                            Diploma
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Field of Study -->
+
+                <div class="form-group">
+
+                    <label for="field_of_study">
+                        Field of Study
+                    </label>
+
+                    <input
+                        type="text"
+                        id="field_of_study"
+                        name="field_of_study"
+                        value="{{ field_of_study }}"
+                        placeholder="e.g. Computer Science">
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SAVE PROFILE BUTTON
+             ================================================= -->
+
+        <div class="form-actions">
+
+            <button
+                type="submit"
+                class="save-button">
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+
+    </form>
+
+
+
+    <!-- =====================================================
+         STANDARDIZED TEST SCORES
+         ===================================================== -->
+
+    <section class="profile-section test-section">
+
+
+        <div class="section-heading">
+
+            <div class="section-icon">
+                📊
+            </div>
+
+            <div>
+
+                <h2>
+                    Standardized Test Scores
+                </h2>
+
+                <p>
+                    Add the standardized tests you have taken.
+                </p>
+
+            </div>
+
+        </div>
+
+
 
         <form
             method="POST"
-            action="{% url 'edit_profile' %}"
-            class="profile-form">
+            action="{% url 'update_test_score' %}"
+            class="test-score-form">
 
             {% csrf_token %}
 
 
-            <!-- =================================================
-                 PERSONAL INFORMATION
-                 ================================================= -->
-
-            <section class="profile-section">
+            <div class="form-grid">
 
 
-                <div class="section-heading">
+                <!-- Test Name -->
 
-                    <div class="section-icon">
-                        👤
-                    </div>
+                <div class="form-group">
 
-                    <div>
+                    <label for="test_name">
+                        Test
+                    </label>
 
-                        <h2>
-                            Personal Information
-                        </h2>
+                    <select
+                        id="test_name"
+                        name="test_name"
+                        required>
 
-                        <p>
-                            Your basic personal details.
-                        </p>
+                        <option value="">
+                            Select a test
+                        </option>
 
-                    </div>
+                        <option value="IELTS">
+                            IELTS
+                        </option>
 
-                </div>
+                        <option value="TOEFL">
+                            TOEFL
+                        </option>
 
+                        <option value="PTE">
+                            PTE
+                        </option>
 
-                <div class="form-grid">
+                        <option value="GRE">
+                            GRE
+                        </option>
 
+                        <option value="GMAT">
+                            GMAT
+                        </option>
 
-                    <!-- Full Name -->
+                        <option value="SAT">
+                            SAT
+                        </option>
 
-                    <div class="form-group">
-
-                        <label for="full_name">
-                            Full Name
-                        </label>
-
-                        <input
-                            type="text"
-                            id="full_name"
-                            name="full_name"
-                            value="{{ full_name }}"
-                            placeholder="Enter your full name"
-                            required>
-
-                    </div>
-
-
-                    <!-- Email -->
-
-                    <div class="form-group">
-
-                        <label for="email">
-                            Email
-                        </label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value="{{ email }}"
-                            readonly>
-
-                        <small>
-                            Email is used as your account identifier.
-                        </small>
-
-                    </div>
-
-
-                    <!-- Phone -->
-
-                    <div class="form-group">
-
-                        <label for="phone">
-                            Phone
-                        </label>
-
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            value="{{ phone }}"
-                            placeholder="Enter your phone number">
-
-                    </div>
-
-
-                    <!-- Nationality -->
-
-                    <div class="form-group">
-
-                        <label for="nationality">
-                            Nationality
-                        </label>
-
-                        <input
-                            type="text"
-                            id="nationality"
-                            name="nationality"
-                            value="{{ nationality }}"
-                            placeholder="Enter your nationality">
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- =================================================
-                 ACADEMIC INFORMATION
-                 ================================================= -->
-
-            <section class="profile-section">
-
-
-                <div class="section-heading">
-
-                    <div class="section-icon">
-                        🎓
-                    </div>
-
-                    <div>
-
-                        <h2>
-                            Academic Information
-                        </h2>
-
-                        <p>
-                            Tell us about your academic background
-                            and study goals.
-                        </p>
-
-                    </div>
+                    </select>
 
                 </div>
 
 
-                <div class="form-grid">
 
+                <!-- Test Score -->
 
-                    <!-- Current Institution -->
+                <div class="form-group">
 
-                    <div class="form-group full-width">
+                    <label for="test_score">
+                        Score
+                    </label>
 
-                        <label for="current_institution">
-                            Current Institution
-                        </label>
-
-                        <input
-                            type="text"
-                            id="current_institution"
-                            name="current_institution"
-                            value="{{ current_institution }}"
-                            placeholder="e.g. BRAC University">
-
-                    </div>
-
-
-                    <!-- Current Degree -->
-
-                    <div class="form-group">
-
-                        <label for="current_degree">
-                            Current Degree
-                        </label>
-
-                        <input
-                            type="text"
-                            id="current_degree"
-                            name="current_degree"
-                            value="{{ current_degree }}"
-                            placeholder="e.g. BSc in Computer Science">
-
-                    </div>
-
-
-                    <!-- CGPA -->
-
-                    <div class="form-group">
-
-                        <label for="cgpa">
-                            CGPA
-                        </label>
-
-                        <input
-                            type="number"
-                            id="cgpa"
-                            name="cgpa"
-                            value="{{ cgpa }}"
-                            placeholder="e.g. 3.75"
-                            min="0"
-                            max="4"
-                            step="0.01">
-
-                    </div>
-
-
-                    <!-- Degree Level Sought -->
-
-                    <div class="form-group">
-
-                        <label for="degree_level_sought">
-                            Degree Level Sought
-                        </label>
-
-                        <select
-                            id="degree_level_sought"
-                            name="degree_level_sought">
-
-                            <option value="">
-                                Select degree level
-                            </option>
-
-                            <option value="Bachelor's" {% if degree_level_sought == "Bachelor's" %}selected{% endif %}>
-                                Bachelor's
-                            </option>
-
-                            <option value="Master's" {% if degree_level_sought == "Master's" %}selected{% endif %}>
-                                Master's
-                            </option>
-
-                            <option value="PhD" {% if degree_level_sought == "PhD" %}selected{% endif %}>
-                                PhD
-                            </option>
-
-                            <option value="Diploma" {% if degree_level_sought == "Diploma" %}selected{% endif %}>
-                                Diploma
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- Field of Study -->
-
-                    <div class="form-group">
-
-                        <label for="field_of_study">
-                            Field of Study
-                        </label>
-
-                        <input
-                            type="text"
-                            id="field_of_study"
-                            name="field_of_study"
-                            value="{{ field_of_study }}"
-                            placeholder="e.g. Computer Science">
-
-                    </div>
+                    <input
+                        type="number"
+                        id="test_score"
+                        name="test_score"
+                        step="0.01"
+                        min="0"
+                        placeholder="Enter your score"
+                        required>
 
                 </div>
 
-            </section>
+
+            </div>
 
 
 
-            <!-- =================================================
-                 SAVE PROFILE BUTTON
-                 ================================================= -->
-
-            <div class="form-actions">
+            <div class="test-button-container">
 
                 <button
                     type="submit"
                     class="save-button">
 
-                    Save Changes
+                    Add / Update Score
 
                 </button>
 
@@ -590,164 +582,47 @@
 
 
 
-        <!-- =====================================================
-             STANDARDIZED TEST SCORES
-             ===================================================== -->
+        <!-- Existing Test Scores -->
 
-        <section class="profile-section test-section">
+        {% if tests %}
 
-            <div class="section-heading">
+            <div class="existing-tests">
 
-                <div class="section-icon">
-                    📊
-                </div>
+                <h3>
+                    Your Test Scores
+                </h3>
 
-                <div>
-                    <h2>Standardized Test Scores</h2>
 
-                    <p>
-                        Add the standardized tests you have taken.
-                    </p>
-                </div>
+                {% for test in tests %}
+
+                    <div class="test-row">
+
+                        <span class="test-name">
+                            {{ test.0 }}
+                        </span>
+
+                        <span class="test-score">
+                            {{ test.1 }}
+                        </span>
+
+                    </div>
+
+                {% endfor %}
+
 
             </div>
 
 
-            <form method="POST"
-                  action="{% url 'update_test_score' %}"
-                  class="test-score-form">
+        {% else %}
 
-                {% csrf_token %}
+            <p class="no-tests">
+                No standardized test scores added yet.
+            </p>
 
-                <div class="form-grid">
-
-                    <div class="form-group">
-
-                        <label for="test_name">
-                            Test
-                        </label>
-
-                        <select
-                            id="test_name"
-                            name="test_name"
-                            required>
-
-                            <option value="">
-                                Select a test
-                            </option>
-
-                            <option value="IELTS">IELTS</option>
-                            <option value="TOEFL">TOEFL</option>
-                            <option value="PTE">PTE</option>
-                            <option value="GRE">GRE</option>
-                            <option value="GMAT">GMAT</option>
-                            <option value="SAT">SAT</option>
-
-                        </select>
-
-                    </div>
+        {% endif %}
 
 
-                    <div class="form-group">
-
-                        <label for="test_score">
-                            Score
-                        </label>
-
-                        <input
-                            type="number"
-                            id="test_score"
-                            name="test_score"
-                            step="0.01"
-                            min="0"
-                            placeholder="Enter your score"
-                            required>
-
-                    </div>
-
-                </div>
+    </section>
 
 
-                <div class="test-button-container">
-
-                    <button
-                        type="submit"
-                        class="save-button">
-
-                        Add / Update Score
-
-                    </button>
-
-                </div>
-
-            </form>
-
-
-            {% if tests %}
-
-                <div class="existing-tests">
-
-                    <h3>Your Test Scores</h3>
-
-                    {% for test in tests %}
-
-                        <div class="test-row">
-
-                            <span class="test-name">
-                                {{ test.0 }}
-                            </span>
-
-                            <span class="test-score">
-                                {{ test.1 }}
-                            </span>
-
-                        </div>
-
-                    {% endfor %}
-
-                </div>
-
-            {% else %}
-
-                <p class="no-tests">
-                    No standardized test scores added yet.
-                </p>
-
-            {% endif %}
-
-        </section>
-
-
-    </main>
-
-
-
-    <!-- =====================================================
-         SIDEBAR JAVASCRIPT
-         ===================================================== -->
-
-    <script>
-
-        const sidebar =
-            document.getElementById("sidebar");
-
-        const toggleButton =
-            document.getElementById("sidebar-toggle");
-
-
-        toggleButton.addEventListener("click", function () {
-
-            sidebar.classList.toggle("collapsed");
-
-            document.body.classList.toggle(
-                "sidebar-collapsed"
-            );
-
-        });
-
-    </script>
-
-
-</body>
-
-</html>
+{% endblock %}
