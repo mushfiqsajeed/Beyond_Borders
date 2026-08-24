@@ -1,0 +1,237 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Explore Scholarships</title>
+    <link rel="icon" type="image/png" href="{% static 'Logo_favicon.png' %}">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+
+            background-image: url("{% static 'background_image_worldMap.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+        }
+
+        .intro {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .filter {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            background-color: white;
+        }
+
+        .results-count {
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f3f4f6;
+            font-weight: bold;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .no-results {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Explore Scholarships</h1>
+
+    <p class="intro">
+        Find scholarships and funding opportunities for international students.
+    </p>
+
+    <!-- Search -->
+<form method="GET">
+
+    <input
+        type="text"
+        name="search"
+        class="search-bar"
+        placeholder="Search scholarship name or university..."
+        value="{{ search }}"
+    >
+
+    <div class="filters">
+
+        <select
+            name="country"
+            class="filter"
+            onchange="this.form.submit()"
+        >
+            <option value="">Filter By Countries</option>
+
+            {% for c in countries %}
+                <option
+                    value="{{ c }}"
+                    {% if country == c %}selected{% endif %}
+                >
+                    {{ c }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <select
+            name="amount"
+            class="filter"
+            onchange="this.form.submit()"
+        >
+            <option value="">Filter By Amounts</option>
+
+            <option value="under_10000"
+                {% if amount == "under_10000" %}selected{% endif %}>
+                Under $10,000
+            </option>
+
+            <option value="10000_25000"
+                {% if amount == "10000_25000" %}selected{% endif %}>
+                $10,000 - $25,000
+            </option>
+
+            <option value="25000_50000"
+                {% if amount == "25000_50000" %}selected{% endif %}>
+                $25,000 - $50,000
+            </option>
+
+            <option value="over_50000"
+                {% if amount == "over_50000" %}selected{% endif %}>
+                Over $50,000
+            </option>
+
+        </select>
+
+    </div>
+
+</form>
+
+    <p class="results-count">
+        {{ scholarships|length }} scholarships found
+    </p>
+
+    {% if scholarships %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Scholarship Name</th>
+                        <th>University</th>
+                        <th>Country</th>
+                        <th>Degree Level</th>
+                        <th>Amount</th>
+                        <th>Minimum CGPA</th>
+                        <th>Application Deadline</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for scholarship in scholarships %}
+
+                        <tr>
+                            <td>{{ scholarship.Scholarship_Name }}</td>
+                            <td>{{ scholarship.university_name }}</td>
+                            <td>{{ scholarship.country_name }}</td>
+                            <td>{{ scholarship.Degree_level }}</td>
+                            <td>${{ scholarship.Amount|floatformat:2 }}</td>
+                            <td>{{ scholarship.Minimum_cgpa }}</td>
+                            <td>{{ scholarship.Application_deadline }}</td>
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+{% else %}
+
+    <div class="no-results">
+        <p>No scholarships found.</p>
+
+        {% if search or country or amount %}
+            <p>Try changing your search or filters.</p>
+        {% else %}
+            <p>There are currently no scholarships available.</p>
+        {% endif %}
+    </div>
+
+{% endif %}
+
+</body>
+</html>
