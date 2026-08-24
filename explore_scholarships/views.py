@@ -97,5 +97,6 @@ def scholarship_list(request):
             "country": country,
             "amount": amount,
             "countries": countries,
+            "active_page": "scholarships",
         }
     )

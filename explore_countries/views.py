@@ -46,6 +46,7 @@ def explore_countries(request):
         {
             "countries": countries,
             "search": search,
+            "active_page": "countries",
         }
     )
 
@@ -95,5 +96,6 @@ def country_detail(request, country_name):
         {
             "country": country,
             "not_found": False,
+            "active_page": "countries",
         }
     )
