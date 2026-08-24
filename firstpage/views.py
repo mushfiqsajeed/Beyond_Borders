@@ -116,7 +116,16 @@ def dashboard(request):
 
         cursor.execute(
             """
-            SELECT Full_Name
+            SELECT
+                Email,
+                Full_Name,
+                Nationality,
+                Phone,
+                Current_institution,
+                Current_degree,
+                cgpa,
+                degree_level_sought,
+                Field_of_study
             FROM Student
             WHERE Email = %s
             """,
@@ -128,11 +137,48 @@ def dashboard(request):
     if student is None:
         return redirect("login")
 
-    full_name = student[0]
+    full_name = student[1]
+
+
+    # ==========================================
+    # PROFILE COMPLETION
+    # ==========================================
+
+    profile_fields = [
+        student[0],  # Email
+        student[1],  # Full Name
+        student[2],  # Nationality
+        student[3],  # Phone
+        student[4],  # Current Institution
+        student[5],  # Current Degree
+        student[6],  # CGPA
+        student[7],  # Degree Level Sought
+        student[8],  # Field of Study
+    ]
+
+    completed_fields = sum(
+        1
+        for field in profile_fields
+        if field is not None and str(field).strip() != ""
+    )
+
+    total_fields = len(profile_fields)
+
+    profile_completion = round(
+        (completed_fields / total_fields) * 100
+    )
+
 
     return render(request, "dashboard.html", {
-        "full_name": full_name
+        "full_name": full_name,
+        "profile_completion": profile_completion
     })
+
 
 def login_loading(request):
     return render(request, "loading.html")
+
+
+def logout_view(request):
+    request.session.flush()
+    return redirect('/')

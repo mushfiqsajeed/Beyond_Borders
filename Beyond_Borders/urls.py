@@ -23,4 +23,6 @@ urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),
     path('', include('firstpage.urls')),
     path("explore-scholarships/", include("explore_scholarships.urls")),
+    path('explore-countries/', include('explore_countries.urls')),
+    path('profile/', include('user_profile.urls')),
 ]
