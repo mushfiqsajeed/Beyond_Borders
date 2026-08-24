@@ -1,0 +1,676 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+Document Review | Beyond Borders
+{% endblock %}
+
+
+
+{% block page_css %}
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+{% endblock %}
+
+
+
+{% block body_class %}
+document-review-page
+{% endblock %}
+
+
+
+{% block main_class %}
+document-review-content
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+<div class="feature-container">
+
+
+
+<!-- HEADER -->
+
+<div class="glass-card feature-header">
+
+
+<span class="feature-badge">
+
+📄 Expert Document Review
+
+</span>
+
+
+
+<h1>
+
+Upload Documents & Get Expert Review
+
+</h1>
+
+
+
+<p>
+
+Submit your admission documents and get professional feedback
+from experienced study abroad consultants.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<!-- MAIN FORM -->
+
+
+<form method="POST" enctype="multipart/form-data">
+
+
+{% csrf_token %}
+
+
+
+<input
+
+type="hidden"
+
+name="expert_id"
+
+id="expert_id"
+
+required
+
+>
+
+
+
+
+
+<!-- UPLOAD SECTION -->
+
+
+<div class="glass-card">
+
+
+<h2>
+Upload Your Documents
+</h2>
+
+
+<p>
+Upload important documents that you want an expert to review.
+</p>
+
+
+<br>
+
+
+
+<div class="upload-box">
+
+
+<div class="upload-icon">
+📂
+</div>
+
+
+
+<h3>
+Select Documents
+</h3>
+
+
+<p>
+Choose multiple files for expert review
+</p>
+
+
+
+<input
+
+type="file"
+
+name="documents"
+
+id="documents"
+
+multiple
+
+required
+
+onchange="showFiles()"
+
+>
+
+
+
+<div id="file_list">
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="document-types">
+
+
+<div class="info-card">
+
+<h3>
+Passport
+</h3>
+
+<p>
+Identity verification document
+</p>
+
+</div>
+
+
+
+<div class="info-card">
+
+<h3>
+Transcript
+</h3>
+
+<p>
+Academic performance records
+</p>
+
+</div>
+
+
+
+
+<div class="info-card">
+
+<h3>
+IELTS / TOEFL
+</h3>
+
+<p>
+Language proficiency certificate
+</p>
+
+</div>
+
+
+
+<div class="info-card">
+
+<h3>
+SOP / CV
+</h3>
+
+<p>
+Application supporting documents
+</p>
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<!-- EXPERT SELECTION -->
+
+
+<div class="glass-card">
+
+
+<h2>
+Choose Your Expert
+</h2>
+
+
+<p>
+Select an expert based on your destination and requirements.
+</p>
+
+
+<br>
+
+
+
+
+<div class="card-grid">
+
+
+
+{% for expert in experts %}
+
+
+
+<div class="info-card expert-card"
+id="expert_card_{{ expert.id }}">
+
+
+
+<h3>
+
+👤 {{ expert.name }}
+
+</h3>
+
+
+
+<p>
+
+{{ expert.specialization }}
+
+</p>
+
+
+
+<br>
+
+
+
+<p>
+
+Experience:
+
+<strong>
+{{ expert.experience }}
+</strong>
+
+</p>
+
+
+
+<p>
+
+Country:
+
+<strong>
+{{ expert.country }}
+</strong>
+
+</p>
+
+
+
+<p>
+
+⭐ {{ expert.rating }}
+
+</p>
+
+
+
+<button
+
+type="button"
+
+class="primary-btn"
+
+onclick="selectExpert(
+'{{ expert.id }}',
+'{{ expert.name }}',
+'{{ expert.id }}'
+)"
+
+>
+
+Select Expert
+
+</button>
+
+
+
+</div>
+
+
+
+{% empty %}
+
+
+<div class="info-card">
+
+
+<h3>
+No Experts Available
+</h3>
+
+
+<p>
+Expert information will appear after database setup.
+</p>
+
+
+</div>
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+</div>
+<!-- REVIEW SUMMARY -->
+
+
+<div class="glass-card">
+
+
+<h2>
+
+Review Summary
+
+</h2>
+
+
+<br>
+
+
+
+
+<div class="card-grid">
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+📂 Uploaded Documents
+
+</h3>
+
+
+<p id="uploaded_files">
+
+No files selected yet.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+👤 Selected Expert
+
+</h3>
+
+
+<p id="selected_expert_text">
+
+No expert selected yet.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+⏱ Expected Review Time
+
+</h3>
+
+
+<p>
+
+24 - 48 Hours
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<br>
+
+
+
+<button
+
+class="primary-btn"
+
+type="submit"
+
+>
+
+Send For Expert Review
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+</form>
+
+
+
+
+
+
+
+
+
+{% if success %}
+
+
+
+<div class="glass-card">
+
+
+<h2>
+
+🎉 Request Submitted Successfully
+
+</h2>
+
+
+
+<p>
+
+{{ success }}
+
+</p>
+
+
+
+<br>
+
+
+
+<span class="status status-success">
+
+Pending Expert Review
+
+</span>
+
+
+
+</div>
+
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block extra_js %}
+
+
+
+<script>
+
+
+function selectExpert(id,name,cardId){
+
+
+    document.getElementById(
+        "expert_id"
+    ).value = id;
+
+
+
+    document.getElementById(
+        "selected_expert_text"
+    ).innerHTML = name;
+
+
+
+    let cards = document.querySelectorAll(
+        ".expert-card"
+    );
+
+
+    cards.forEach(function(card){
+
+        card.style.border =
+        "1px solid #dbe7ff";
+
+    });
+
+
+
+    document.getElementById(
+        "expert_card_" + cardId
+    ).style.border =
+    "3px solid #2563eb";
+
+}
+
+
+
+
+function showFiles(){
+
+
+    let files =
+    document.getElementById(
+        "documents"
+    ).files;
+
+
+
+    let output = "";
+
+
+
+    for(let i=0;i<files.length;i++){
+
+
+        output +=
+        "📄 "
+        +
+        files[i].name
+        +
+        "<br>";
+
+    }
+
+
+
+    if(output==""){
+
+        output =
+        "No files selected yet.";
+
+    }
+
+
+
+    document.getElementById(
+        "uploaded_files"
+    ).innerHTML = output;
+
+
+
+}
+
+
+
+</script>
+
+
+
+{% endblock %}

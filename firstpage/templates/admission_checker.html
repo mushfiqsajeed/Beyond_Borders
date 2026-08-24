@@ -1,0 +1,865 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+
+Admission Requirement Checker | Beyond Borders
+
+{% endblock %}
+
+
+
+{% block page_css %}
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="feature-container">
+
+
+
+<!-- HEADER -->
+
+<div class="glass-card feature-header">
+
+
+<span class="feature-badge">
+
+🎓 Smart Admission Analysis
+
+</span>
+
+
+
+<h1>
+
+Admission Requirement Checker
+
+</h1>
+
+
+
+<p>
+
+Compare your academic profile with university admission
+requirements and check your current admission readiness.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- UNIVERSITY FORM -->
+
+
+<div class="glass-card">
+
+
+<h2>
+
+Choose Your University
+
+</h2>
+
+
+<p>
+
+Select a university to analyze your eligibility.
+
+</p>
+
+
+
+<br>
+
+
+
+
+
+<form method="POST">
+
+
+{% csrf_token %}
+
+
+
+<div class="form-grid">
+
+
+
+<div class="form-group">
+
+
+<label>
+
+University
+
+</label>
+
+
+
+
+<select name="university" required>
+
+
+<option value="">
+
+Select University
+
+</option>
+
+
+
+
+
+{% for university in universities %}
+
+
+
+<option value="{{ university }}"
+
+{% if selected_university == university %}
+
+selected
+
+{% endif %}
+
+>
+
+{{ university }}
+
+</option>
+
+
+
+
+{% endfor %}
+
+
+
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+<div>
+
+
+<button class="primary-btn">
+
+Check My Eligibility
+
+</button>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</form>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{% if result %}
+
+
+
+
+
+
+<!-- MATCH RESULT -->
+
+
+<div class="glass-card">
+
+
+
+<div class="match-section">
+
+
+
+
+
+<div class="progress-circle"
+
+style="--progress: {{ result.match_percentage }}%;">
+
+
+
+<div class="progress-inner">
+
+
+
+<div class="progress-number">
+
+{{ result.match_percentage }}%
+
+</div>
+
+
+
+<div class="progress-label">
+
+Profile Match
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="match-text">
+
+
+
+<h2>
+
+Admission Readiness
+
+</h2>
+
+
+
+
+<p>
+
+Your profile has been compared with
+
+<strong>
+
+{{ result.university }}
+
+</strong>
+
+admission requirements.
+
+</p>
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="card-grid">
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+Requirements Met
+
+</h3>
+
+
+
+<div class="value">
+
+{{ result.fulfilled_count }}
+
+/
+
+{{ result.total_requirements }}
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+Need Attention
+
+</h3>
+
+
+<div class="value">
+
+{{ result.needs_attention }}
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+University
+
+</h3>
+
+
+<p>
+
+{{ result.university }}
+
+</p>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+<!-- continue in Part 2 -->
+ <!-- ACADEMIC SECTION -->
+
+
+<div class="glass-card">
+
+
+<h2>
+
+Academic Profile Analysis
+
+</h2>
+
+
+
+<br>
+
+
+
+
+<div class="card-grid">
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+Required CGPA
+
+</h3>
+
+
+<div class="value">
+
+{{ result.minimum_cgpa }}
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+Your CGPA
+
+</h3>
+
+
+
+<div class="value">
+
+
+{% if result.student_cgpa %}
+
+{{ result.student_cgpa }}
+
+
+
+{% else %}
+
+N/A
+
+
+
+{% endif %}
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+Status
+
+</h3>
+
+
+
+
+
+{% if result.cgpa_status == "fulfilled" %}
+
+
+
+<span class="status status-success">
+
+Requirement Met
+
+</span>
+
+
+
+
+
+{% else %}
+
+
+
+<span class="status status-danger">
+
+Not Met
+
+</span>
+
+
+
+
+
+{% endif %}
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- TEST SCORE SECTION -->
+
+
+
+<div class="glass-card">
+
+
+
+<h2>
+
+Standardized Test Analysis
+
+</h2>
+
+
+
+<br>
+
+
+
+
+
+<div class="card-grid">
+
+
+
+
+
+{% for test in result.tests %}
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+
+<h3>
+
+{{ test.name }}
+
+</h3>
+
+
+
+
+
+<p>
+
+Required:
+
+<strong>
+
+{{ test.required }}
+
+</strong>
+
+</p>
+
+
+
+
+
+<br>
+
+
+
+
+
+<p>
+
+Your Score:
+
+
+
+{% if test.student_score %}
+
+
+
+<strong>
+
+{{ test.student_score }}
+
+</strong>
+
+
+
+
+
+{% else %}
+
+
+
+<strong>
+
+Not Provided
+
+</strong>
+
+
+
+
+
+{% endif %}
+
+
+
+
+
+</p>
+
+
+
+
+
+<br>
+
+
+
+
+
+{% if test.status == "fulfilled" %}
+
+
+
+<span class="status status-success">
+
+Completed
+
+</span>
+
+
+
+
+
+{% elif test.status == "not_provided" %}
+
+
+
+
+
+<span class="status status-warning">
+
+Missing
+
+</span>
+
+
+
+
+
+{% else %}
+
+
+
+
+
+<span class="status status-danger">
+
+Need Improvement
+
+</span>
+
+
+
+
+
+{% endif %}
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+{% endfor %}
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- DOCUMENT SECTION -->
+
+
+
+<div class="glass-card">
+
+
+
+<h2>
+
+Required Documents
+
+</h2>
+
+
+
+<br>
+
+
+
+<p>
+
+{{ result.documents }}
+
+</p>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{% else %}
+
+
+
+
+
+
+
+<div class="glass-card">
+
+
+
+<h2>
+
+Ready to Check?
+
+</h2>
+
+
+
+
+
+<p>
+
+Select a university above and click
+
+"Check My Eligibility" to generate your admission report.
+
+</p>
+
+
+
+
+
+</div>
+
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+{% endblock %}
