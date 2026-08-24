@@ -32,6 +32,7 @@ def scholarship_eligibility(request):
             "scholarship_eligibility.html",
             {
                 "countries": countries,
+                "active_page": "eligibility",
             }
         )
 
@@ -467,5 +468,6 @@ def scholarship_eligibility(request):
             "eligible": eligible,
             "possible": possible,
             "not_eligible": not_eligible,
+            "active_page": "eligibility",
         }
     )

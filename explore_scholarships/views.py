@@ -255,26 +255,12 @@ def scholarship_list(request):
         request,
         "explore_scholarships.html",
         {
-
-            "scholarships":
-                scholarships,
-
-            "search":
-                search,
-
-            "country":
-                country,
-
-            "amount":
-                amount,
-
-            "countries":
-                countries,
-
-            "active_page":
-                "scholarships",
-
-            "current_url":
-                request.get_full_path(),
+            "scholarships": scholarships,
+            "search": search,
+            "country": country,
+            "amount": amount,
+            "countries": countries,
+            "active_page": "scholarships",
+            "current_url": request.get_full_path(),
         }
     )
