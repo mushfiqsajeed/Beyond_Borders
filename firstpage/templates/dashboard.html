@@ -210,7 +210,7 @@
 
         <!-- Profile -->
 
-        <a href="#"
+        <a href="{% url 'profile' %}"
            class="sidebar-link">
 
             <span class="sidebar-icon">
@@ -303,9 +303,7 @@
                             Profile Completion
                         </p>
 
-                        <h2>
-                            20%
-                        </h2>
+                        <h2>{{ profile_completion }}%</h2>
 
                     </div>
 
@@ -319,12 +317,14 @@
 
                 <div class="progress-bar">
 
-                    <div class="progress-fill"></div>
+                    <div class="progress-fill"
+                        style="width: {{ profile_completion }}%;">
+                    </div>
 
                 </div>
 
 
-                <a href="#"
+                <a href="{% url 'profile' %}"
                    class="card-link">
 
                     Complete Profile →

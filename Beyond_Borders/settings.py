@@ -39,8 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'firstpage',
     'scholarship_eligibility',
-    'debug_toolbar'
+    'explore_scholarships',
+    'explore_countries',
+    'debug_toolbar',
+    'user_profile'
 ]
+
 
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
