@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'explore_countries',
     'debug_toolbar',
     'user_profile',
-    "explore_universities",
+    'explore_universities',
+    'saved_items',
 ]
 
 

@@ -107,10 +107,19 @@ def login_view(request):
 #= = = Dashboard = = =#
 def dashboard(request):
 
+    # =====================================================
+    # CHECK LOGIN SESSION
+    # =====================================================
+
     email = request.session.get("student_email")
 
     if not email:
         return redirect("login")
+
+
+    # =====================================================
+    # GET STUDENT INFORMATION
+    # =====================================================
 
     with connection.cursor() as cursor:
 
@@ -134,15 +143,17 @@ def dashboard(request):
 
         student = cursor.fetchone()
 
+
     if student is None:
         return redirect("login")
+
 
     full_name = student[1]
 
 
-    # ==========================================
+    # =====================================================
     # PROFILE COMPLETION
-    # ==========================================
+    # =====================================================
 
     profile_fields = [
         student[0],  # Email
@@ -156,24 +167,83 @@ def dashboard(request):
         student[8],  # Field of Study
     ]
 
+
     completed_fields = sum(
         1
         for field in profile_fields
-        if field is not None and str(field).strip() != ""
+        if field is not None
+        and str(field).strip() != ""
     )
 
+
     total_fields = len(profile_fields)
+
 
     profile_completion = round(
         (completed_fields / total_fields) * 100
     )
 
 
-    return render(request, "dashboard.html", {
-        "full_name": full_name,
-        "profile_completion": profile_completion,
-        "active_page": "dashboard"
-    })
+    # =====================================================
+    # COUNT SAVED UNIVERSITIES
+    # =====================================================
+
+    with connection.cursor() as cursor:
+
+        cursor.execute(
+            """
+            SELECT COUNT(*)
+            FROM Saved_University
+            WHERE Email = %s
+            """,
+            [email]
+        )
+
+        saved_university_count = cursor.fetchone()[0]
+
+
+    # =====================================================
+    # COUNT SAVED SCHOLARSHIPS
+    # =====================================================
+
+    with connection.cursor() as cursor:
+
+        cursor.execute(
+            """
+            SELECT COUNT(*)
+            FROM Saved_Scholarship
+            WHERE Email = %s
+            """,
+            [email]
+        )
+
+        saved_scholarship_count = cursor.fetchone()[0]
+
+
+    # =====================================================
+    # RENDER DASHBOARD
+    # =====================================================
+
+    return render(
+        request,
+        "dashboard.html",
+        {
+            "full_name":
+                full_name,
+
+            "profile_completion":
+                profile_completion,
+
+            "saved_university_count":
+                saved_university_count,
+
+            "saved_scholarship_count":
+                saved_scholarship_count,
+
+            "active_page":
+                "dashboard",
+        }
+    )
 
 
 def login_loading(request):

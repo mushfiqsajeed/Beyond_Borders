@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+    Saved Items | Beyond Borders
+{% endblock %}
+
+
+{% block page_css %}
+    <link
+        rel="stylesheet"
+        href="{% static 'saved.css' %}">
+{% endblock %}
+
+
+{% block body_class %}
+saved-page
+{% endblock %}
+
+
+{% block main_class %}
+saved-content
+{% endblock %}
+
+
+{% block content %}
+
+    <section class="saved-heading">
+
+        <h1>
+            Saved Items
+        </h1>
+
+        <p>
+            Access the universities and scholarships
+            you have saved for later.
+        </p>
+
+    </section>
+
+
+    <section class="saved-options">
+
+
+        <a
+            href="{% url 'saved_universities' %}"
+            class="saved-option-card">
+
+            <div class="saved-option-icon">
+                🎓
+            </div>
+
+            <div class="saved-option-text">
+
+                <h2>
+                    Saved Universities
+                </h2>
+
+                <p>
+                    View all universities you have saved.
+                </p>
+
+            </div>
+
+            <span class="saved-option-arrow">
+                →
+            </span>
+
+        </a>
+
+
+
+        <a
+            href="{% url 'saved_scholarships' %}"
+            class="saved-option-card">
+
+            <div class="saved-option-icon">
+                💰
+            </div>
+
+            <div class="saved-option-text">
+
+                <h2>
+                    Saved Scholarships
+                </h2>
+
+                <p>
+                    View all scholarships you have saved.
+                </p>
+
+            </div>
+
+            <span class="saved-option-arrow">
+                →
+            </span>
+
+        </a>
+
+
+    </section>
+
+{% endblock %}

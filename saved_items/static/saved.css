@@ -1,0 +1,639 @@
+/* =====================================================
+   BEYOND BORDERS - SAVED ITEMS
+   ===================================================== */
+
+
+/* =====================================================
+   PAGE
+   ===================================================== */
+
+.saved-page {
+
+    min-height: 100vh;
+
+    color: #1e293b;
+}
+
+
+
+/* =====================================================
+   MAIN CONTENT
+   ===================================================== */
+
+.saved-content {
+
+    margin-left: 255px;
+
+    min-height: 100vh;
+
+    padding:
+        0 45px 60px;
+
+    background: transparent;
+
+    transition:
+        margin-left 0.3s ease;
+}
+
+
+body.sidebar-collapsed
+.saved-content {
+
+    margin-left: 75px;
+}
+
+
+
+/* =====================================================
+   PAGE HEADING
+   ===================================================== */
+
+.saved-heading {
+
+    padding:
+        42px 0 30px;
+}
+
+
+.saved-heading h1 {
+
+    margin-bottom: 8px;
+
+    color: #1d2d5c;
+
+    font-size: 34px;
+
+    font-weight: 700;
+}
+
+
+.saved-heading p {
+
+    color: #687a96;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+
+/* =====================================================
+   SAVED OPTIONS
+   ===================================================== */
+
+.saved-options {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+
+    max-width: 900px;
+}
+
+
+
+/* =====================================================
+   OPTION CARD
+   ===================================================== */
+
+.saved-option-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding:
+        25px;
+
+    min-height: 150px;
+
+    background: white;
+
+    border:
+        1px solid #dce3ee;
+
+    border-radius: 15px;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 5px 20px
+        rgba(30, 60, 100, 0.06);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.saved-option-card:hover {
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 10px 28px
+        rgba(30, 60, 100, 0.11);
+}
+
+
+
+/* =====================================================
+   ICON
+   ===================================================== */
+
+.saved-option-icon {
+
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #edf3ff;
+
+    font-size: 25px;
+}
+
+
+
+/* =====================================================
+   TEXT
+   ===================================================== */
+
+.saved-option-text {
+
+    flex: 1;
+}
+
+
+.saved-option-text h2 {
+
+    margin-bottom: 6px;
+
+    color: #1d2d5c;
+
+    font-size: 19px;
+}
+
+
+.saved-option-text p {
+
+    color: #687a96;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+
+/* =====================================================
+   ARROW
+   ===================================================== */
+
+.saved-option-arrow {
+
+    flex-shrink: 0;
+
+    color: #3475c4;
+
+    font-size: 24px;
+
+    font-weight: 700;
+}
+
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    .saved-options {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .saved-content {
+
+        margin-left: 75px;
+
+        padding-left: 25px;
+
+        padding-right: 25px;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .saved-content {
+
+        padding:
+            0 18px 40px;
+    }
+
+
+    .saved-heading {
+
+        padding-top: 30px;
+    }
+
+
+    .saved-heading h1 {
+
+        font-size: 27px;
+    }
+
+
+    .saved-option-card {
+
+        padding: 20px;
+    }
+
+}
+
+/* =====================================================
+   SAVED UNIVERSITY GRID
+   ===================================================== */
+
+.saved-university-list {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+
+/* =====================================================
+   SAVED UNIVERSITY CARD
+   ===================================================== */
+
+.saved-university-card {
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 25px;
+
+    background: white;
+
+    border:
+        1px solid #dce3ee;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(30, 60, 100, 0.06);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.saved-university-card:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 10px 28px
+        rgba(30, 60, 100, 0.10);
+}
+
+
+
+/* =====================================================
+   SAVED UNIVERSITY HEADER
+   ===================================================== */
+
+.saved-university-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 18px;
+
+    margin-bottom: 18px;
+
+    border-bottom:
+        1px solid #edf1f6;
+}
+
+
+.saved-university-header h2 {
+
+    margin: 0;
+
+    color: #1d2d5c;
+
+    font-size: 20px;
+
+    line-height: 1.4;
+}
+
+
+.saved-ranking-badge {
+
+    flex-shrink: 0;
+
+    padding:
+        6px 11px;
+
+    border-radius: 20px;
+
+    background: #edf3ff;
+
+    color: #2561a8;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+
+/* =====================================================
+   SAVED UNIVERSITY INFORMATION
+   ===================================================== */
+
+.saved-university-info {
+
+    display: grid;
+
+    gap: 14px;
+}
+
+
+.saved-university-info p {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin: 0;
+
+    color: #52627a;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+.saved-university-info strong {
+
+    color: #334155;
+
+    font-size: 13px;
+}
+
+
+.saved-info-icon {
+
+    width: 24px;
+
+    flex-shrink: 0;
+
+    text-align: center;
+
+    font-size: 17px;
+}
+
+
+
+/* =====================================================
+   EMPTY SAVED LIST
+   ===================================================== */
+
+.saved-empty-state {
+
+    max-width: 650px;
+
+    margin-top: 10px;
+
+    padding:
+        45px 30px;
+
+    background: white;
+
+    border:
+        1px solid #dce3ee;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 20px
+        rgba(30, 60, 100, 0.06);
+}
+
+
+.saved-empty-icon {
+
+    margin-bottom: 15px;
+
+    font-size: 36px;
+}
+
+
+.saved-empty-state h2 {
+
+    margin-bottom: 8px;
+
+    color: #1d2d5c;
+
+    font-size: 21px;
+}
+
+
+.saved-empty-state p {
+
+    margin-bottom: 22px;
+
+    color: #687a96;
+
+    font-size: 14px;
+}
+
+
+.browse-button {
+
+    display: inline-block;
+
+    padding:
+        11px 18px;
+
+    border-radius: 8px;
+
+    background: #12478d;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.browse-button:hover {
+
+    background: #0e376e;
+
+    transform:
+        translateY(-1px);
+}
+
+
+
+/* =====================================================
+   SAVED LIST RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 1000px) {
+
+    .saved-university-list {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .saved-university-header {
+
+        flex-direction: column;
+    }
+
+
+    .saved-ranking-badge {
+
+        align-self: flex-start;
+    }
+
+}
+
+/* =====================================================
+   SAVED SCHOLARSHIPS TABLE
+   ===================================================== */
+
+.saved-scholarship-table-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    background: white;
+
+    border:
+        1px solid #dce3ee;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(30, 60, 100, 0.06);
+}
+
+
+.saved-scholarship-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+
+.saved-scholarship-table th,
+.saved-scholarship-table td {
+
+    padding:
+        16px;
+
+    text-align: left;
+
+    border-bottom:
+        1px solid #edf1f6;
+
+    font-size: 14px;
+}
+
+
+.saved-scholarship-table th {
+
+    background: #f3f4f6;
+
+    color: #334155;
+
+    font-weight: 700;
+}
+
+
+.saved-scholarship-table td {
+
+    color: #52627a;
+}
+
+
+.saved-scholarship-table tbody
+tr:last-child td {
+
+    border-bottom: none;
+}
+
+
+.saved-scholarship-table tbody tr {
+
+    transition:
+        background 0.2s ease;
+}
+
+
+.saved-scholarship-table tbody
+tr:hover {
+
+    background: #f8fafc;
+}

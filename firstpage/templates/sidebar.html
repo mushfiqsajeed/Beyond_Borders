@@ -170,8 +170,9 @@
 
         <!-- Saved -->
 
-        <a href="#"
-           class="sidebar-link">
+        <a
+            href="{% url 'saved_home' %}"
+            class="sidebar-link {% if active_page == 'saved' %}active{% endif %}">
 
             <span class="sidebar-icon">
                 🔖

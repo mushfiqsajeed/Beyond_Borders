@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+    Saved Universities | Beyond Borders
+{% endblock %}
+
+
+{% block page_css %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'saved.css' %}">
+
+{% endblock %}
+
+
+{% block body_class %}
+saved-page
+{% endblock %}
+
+
+{% block main_class %}
+saved-content
+{% endblock %}
+
+
+{% block content %}
+
+
+    <!-- =====================================================
+         PAGE HEADING
+         ===================================================== -->
+
+    <section class="saved-heading">
+
+        <h1>
+            Saved Universities
+        </h1>
+
+        <p>
+            View the universities you have saved for later.
+        </p>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         UNIVERSITY LIST
+         ===================================================== -->
+
+    {% if universities %}
+
+
+        <section class="saved-university-list">
+
+
+            {% for university in universities %}
+
+
+                <article class="saved-university-card">
+
+
+                    <div class="saved-university-header">
+
+
+                        <h2>
+                            {{ university.university_name }}
+                        </h2>
+
+
+                        <span class="saved-ranking-badge">
+
+                            Rank #{{ university.world_ranking }}
+
+                        </span>
+
+
+                    </div>
+
+
+
+                    <div class="saved-university-info">
+
+
+                        <p>
+
+                            <span class="saved-info-icon">
+                                🌍
+                            </span>
+
+                            <span>
+
+                                <strong>
+                                    Country
+                                </strong>
+
+                                <br>
+
+                                {{ university.country_name }}
+
+                            </span>
+
+                        </p>
+
+
+
+                        <p>
+
+                            <span class="saved-info-icon">
+                                💰
+                            </span>
+
+                            <span>
+
+                                <strong>
+                                    Tuition Fee
+                                </strong>
+
+                                <br>
+
+                                ${{ university.tuition_fee }}
+
+                            </span>
+
+                        </p>
+
+
+
+                        <p>
+
+                            <span class="saved-info-icon">
+                                📅
+                            </span>
+
+                            <span>
+
+                                <strong>
+                                    Application Deadline
+                                </strong>
+
+                                <br>
+
+                                {{ university.application_deadline|date:"F j, Y" }}
+
+                            </span>
+
+                        </p>
+
+
+                    </div>
+
+
+                </article>
+
+
+            {% endfor %}
+
+
+        </section>
+
+
+    {% else %}
+
+
+        <!-- =================================================
+             EMPTY SAVED LIST
+             ================================================= -->
+
+        <div class="saved-empty-state">
+
+
+            <div class="saved-empty-icon">
+
+                🔖
+
+            </div>
+
+
+            <h2>
+                No saved universities yet
+            </h2>
+
+
+            <p>
+                Universities you save will appear here.
+            </p>
+
+
+            <a
+                href="{% url 'explore_universities' %}"
+                class="browse-button">
+
+                Explore Universities →
+
+            </a>
+
+
+        </div>
+
+
+    {% endif %}
+
+
+{% endblock %}

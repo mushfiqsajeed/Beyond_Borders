@@ -4,19 +4,35 @@ from django.shortcuts import render, redirect
 
 def explore_universities(request):
 
+    # =====================================================
+    # CHECK LOGIN SESSION
+    # =====================================================
+
     email = request.session.get("student_email")
 
     if not email:
         return redirect("login")
 
 
-    search = request.GET.get("search", "").strip()
+    # =====================================================
+    # SEARCH AND SORT
+    # =====================================================
+
+    search = request.GET.get(
+        "search",
+        ""
+    ).strip()
+
 
     sort_by = request.GET.get(
         "sort_by",
         "ranking"
     )
 
+
+    # =====================================================
+    # ALLOWED SORT OPTIONS
+    # =====================================================
 
     sort_options = {
 
@@ -42,6 +58,10 @@ def explore_universities(request):
         "world_ranking ASC"
     )
 
+
+    # =====================================================
+    # OFFICIAL UNIVERSITY WEBSITES
+    # =====================================================
 
     university_websites = {
 
@@ -83,6 +103,10 @@ def explore_universities(request):
     }
 
 
+    # =====================================================
+    # FETCH UNIVERSITIES
+    # =====================================================
+
     with connection.cursor() as cursor:
 
         if search:
@@ -94,11 +118,15 @@ def explore_universities(request):
                     tuition_fee,
                     application_deadline,
                     world_ranking
+
                 FROM University
+
                 WHERE university_name LIKE %s
                    OR country_name LIKE %s
+
                 ORDER BY {order_by}
             """
+
 
             cursor.execute(
                 sql,
@@ -107,6 +135,7 @@ def explore_universities(request):
                     f"%{search}%",
                 ]
             )
+
 
         else:
 
@@ -117,9 +146,12 @@ def explore_universities(request):
                     tuition_fee,
                     application_deadline,
                     world_ranking
+
                 FROM University
+
                 ORDER BY {order_by}
             """
+
 
             cursor.execute(sql)
 
@@ -127,43 +159,115 @@ def explore_universities(request):
         rows = cursor.fetchall()
 
 
+    # =====================================================
+    # FETCH THIS STUDENT'S SAVED UNIVERSITIES
+    # =====================================================
+
+    with connection.cursor() as cursor:
+
+        cursor.execute(
+            """
+            SELECT
+                university_name
+
+            FROM Saved_University
+
+            WHERE Email = %s
+            """,
+            [email]
+        )
+
+
+        saved_rows = cursor.fetchall()
+
+
+    # Convert the saved university names into a set.
+    #
+    # Example:
+    #
+    # {
+    #     "University of Oxford",
+    #     "ETH Zurich"
+    # }
+
+    saved_university_names = {
+
+        row[0]
+
+        for row in saved_rows
+    }
+
+
+    # =====================================================
+    # BUILD UNIVERSITY DICTIONARIES
+    # =====================================================
+
     universities = []
+
 
     for row in rows:
 
         university_name = row[0]
 
-        universities.append({
 
-            "university_name":
-                university_name,
+        universities.append(
+            {
 
-            "country_name":
-                row[1],
+                "university_name":
+                    university_name,
 
-            "tuition_fee":
-                row[2],
+                "country_name":
+                    row[1],
 
-            "application_deadline":
-                row[3],
+                "tuition_fee":
+                    row[2],
 
-            "world_ranking":
-                row[4],
+                "application_deadline":
+                    row[3],
 
-            "website_url":
-                university_websites.get(
+                "world_ranking":
+                    row[4],
+
+                "website_url":
+                    university_websites.get(
+                        university_name
+                    ),
+
+                # True if this university is already
+                # saved by the logged-in student.
+
+                "is_saved":
                     university_name
-                ),
-        })
+                    in saved_university_names,
+            }
+        )
 
+
+    # =====================================================
+    # RENDER PAGE
+    # =====================================================
 
     return render(
         request,
         "explore_universities.html",
         {
-            "universities": universities,
-            "search": search,
-            "sort_by": sort_by,
-            "active_page": "universities",
+
+            "universities":
+                universities,
+
+            "search":
+                search,
+
+            "sort_by":
+                sort_by,
+
+            "active_page":
+                "universities",
+
+            # Keeps the current search/sort URL so that
+            # after saving we can return to the same page.
+
+            "current_url":
+                request.get_full_path(),
         }
     )

@@ -464,7 +464,106 @@ body.sidebar-collapsed
         translateY(-1px);
 }
 
+/* =====================================================
+   UNIVERSITY CARD ACTIONS
+   ===================================================== */
 
+.university-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+
+
+/* =====================================================
+   WEBSITE BUTTON
+   ===================================================== */
+
+.university-actions .details-button {
+
+    margin-top: 0;
+}
+
+
+
+/* =====================================================
+   SAVE FORM
+   ===================================================== */
+
+.save-form {
+
+    margin: 0;
+
+    padding: 0;
+}
+
+
+
+/* =====================================================
+   SAVE BUTTON
+   ===================================================== */
+
+.save-button {
+
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border:
+        1px solid #dce3ee;
+
+    border-radius: 8px;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.save-button:hover {
+
+    background: #edf3ff;
+
+    border-color: #b9c9df;
+
+    transform:
+        translateY(-1px);
+}
+
+
+
+/* =====================================================
+   SAVE ICON
+   ===================================================== */
+
+.save-icon {
+
+    width: 22px;
+    height: 22px;
+
+    object-fit: contain;
+
+    display: block;
+}
 
 /* =====================================================
    NO RESULTS

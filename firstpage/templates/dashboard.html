@@ -129,7 +129,7 @@ dashboard-content
                     </p>
 
                     <h2>
-                        0
+                        {{ saved_university_count }}
                     </h2>
 
                 </div>
@@ -148,7 +148,7 @@ dashboard-content
 
 
             <a
-                href="#"
+                href="{% url 'saved_universities' %}"
                 class="card-link">
 
                 View Saved →
@@ -174,7 +174,7 @@ dashboard-content
                     </p>
 
                     <h2>
-                        0
+                        {{ saved_scholarship_count }}
                     </h2>
 
                 </div>
@@ -193,7 +193,7 @@ dashboard-content
 
 
             <a
-                href="#"
+                href="{% url 'saved_scholarships' %}"
                 class="card-link">
 
                 View Saved →

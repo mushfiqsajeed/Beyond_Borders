@@ -27,4 +27,5 @@ urlpatterns = [
     path("explore-countries/", include("explore_countries.urls")),
     path("profile/", include("user_profile.urls")),
     path("universities/", include("explore_universities.urls")),
+    path("saved/", include("saved_items.urls")),
 ]

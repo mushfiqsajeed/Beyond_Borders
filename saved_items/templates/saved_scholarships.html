@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+    Saved Scholarships | Beyond Borders
+{% endblock %}
+
+
+{% block page_css %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'saved.css' %}">
+
+{% endblock %}
+
+
+{% block body_class %}
+saved-page
+{% endblock %}
+
+
+{% block main_class %}
+saved-content
+{% endblock %}
+
+
+{% block content %}
+
+
+    <!-- =====================================================
+         PAGE HEADING
+         ===================================================== -->
+
+    <section class="saved-heading">
+
+        <h1>
+            Saved Scholarships
+        </h1>
+
+        <p>
+            View the scholarships you have saved for later.
+        </p>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SAVED SCHOLARSHIPS
+         ===================================================== -->
+
+    {% if scholarships %}
+
+
+        <div class="saved-scholarship-table-container">
+
+
+            <table class="saved-scholarship-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Scholarship Name
+                        </th>
+
+                        <th>
+                            University
+                        </th>
+
+                        <th>
+                            Country
+                        </th>
+
+                        <th>
+                            Degree Level
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Minimum CGPA
+                        </th>
+
+                        <th>
+                            Application Deadline
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <tbody>
+
+
+                    {% for scholarship in scholarships %}
+
+                        <tr>
+
+                            <td>
+                                {{ scholarship.Scholarship_Name }}
+                            </td>
+
+                            <td>
+                                {{ scholarship.university_name }}
+                            </td>
+
+                            <td>
+                                {{ scholarship.country_name }}
+                            </td>
+
+                            <td>
+                                {{ scholarship.Degree_level }}
+                            </td>
+
+                            <td>
+                                ${{ scholarship.Amount|floatformat:2 }}
+                            </td>
+
+                            <td>
+                                {{ scholarship.Minimum_cgpa }}
+                            </td>
+
+                            <td>
+                                {{ scholarship.Application_deadline|date:"M. j, Y" }}
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    {% else %}
+
+
+        <!-- =================================================
+             EMPTY SAVED LIST
+             ================================================= -->
+
+        <div class="saved-empty-state">
+
+
+            <div class="saved-empty-icon">
+
+                🔖
+
+            </div>
+
+
+            <h2>
+                No saved scholarships yet
+            </h2>
+
+
+            <p>
+                Scholarships you save will appear here.
+            </p>
+
+
+            <a
+                href="{% url 'scholarship_list' %}"
+                class="browse-button">
+
+                Explore Scholarships →
+
+            </a>
+
+
+        </div>
+
+
+    {% endif %}
+
+
+{% endblock %}

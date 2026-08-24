@@ -263,19 +263,83 @@ universities-content
                      OFFICIAL WEBSITE
                      ========================================= -->
 
-                {% if university.website_url %}
+<!-- =========================================
+     CARD ACTIONS
+     ========================================= -->
 
-                    <a
-                        href="{{ university.website_url }}"
-                        class="details-button"
-                        target="_blank"
-                        rel="noopener noreferrer">
+<div class="university-actions">
 
-                        Visit Official Website →
 
-                    </a>
+    <!-- Official Website -->
+
+    {% if university.website_url %}
+
+        <a
+            href="{{ university.website_url }}"
+            class="details-button"
+            target="_blank"
+            rel="noopener noreferrer">
+
+            Visit Official Website →
+
+        </a>
+
+    {% endif %}
+
+
+
+        <!-- Save / Unsave University -->
+
+        <form
+            method="POST"
+            action="{% url 'toggle_saved_university' %}"
+            class="save-form">
+
+            {% csrf_token %}
+
+
+            <input
+                type="hidden"
+                name="university_name"
+                value="{{ university.university_name }}">
+
+
+            <input
+                type="hidden"
+                name="next"
+                value="{{ current_url }}">
+
+
+            <button
+                type="submit"
+                class="save-button"
+                title="{% if university.is_saved %}Remove from Saved{% else %}Save University{% endif %}">
+
+
+                {% if university.is_saved %}
+
+                    <img
+                        src="{% static 'saved.png' %}"
+                        alt="Saved University"
+                        class="save-icon">
+
+                {% else %}
+
+                    <img
+                        src="{% static 'unsaved.png' %}"
+                        alt="Save University"
+                        class="save-icon">
 
                 {% endif %}
+
+
+            </button>
+
+
+        </form>
+
+
+    </div>
 
 
             </article>

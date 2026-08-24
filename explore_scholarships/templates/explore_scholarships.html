@@ -174,6 +174,103 @@
     }
 
 
+            /* =====================================================
+        SCHOLARSHIP NAME + SAVE BUTTON
+        ===================================================== */
+
+        .scholarship-name-cell {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            min-width: 190px;
+        }
+
+
+        .scholarship-name-text {
+
+            flex: 1;
+
+            line-height: 1.4;
+        }
+
+
+
+        /* =====================================================
+        SAVE FORM
+        ===================================================== */
+
+        .scholarship-save-form {
+
+            margin: 0;
+
+            padding: 0;
+
+            flex-shrink: 0;
+        }
+
+
+
+        /* =====================================================
+        SAVE BUTTON
+        ===================================================== */
+
+        .scholarship-save-button {
+
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 0;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            flex-shrink: 0;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .scholarship-save-button:hover {
+
+            background: #edf3ff;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+
+        /* =====================================================
+        SAVE ICON
+        ===================================================== */
+
+        .scholarship-save-icon {
+
+            width: 26px;
+            height: 26px;
+
+            display: block;
+
+            object-fit: contain;
+        }
 
     /* =====================================================
        TABLET
@@ -436,8 +533,77 @@
                         <tr>
 
                             <td>
-                                {{ scholarship.Scholarship_Name }}
-                            </td>
+
+            <div class="scholarship-name-cell">
+
+
+                <span class="scholarship-name-text">
+
+                    {{ scholarship.Scholarship_Name }}
+
+                </span>
+
+
+
+                <form
+                    method="POST"
+                    action="{% url 'toggle_saved_scholarship' %}"
+                    class="scholarship-save-form">
+
+                    {% csrf_token %}
+
+
+                    <input
+                        type="hidden"
+                        name="university_name"
+                        value="{{ scholarship.university_name }}">
+
+
+                    <input
+                        type="hidden"
+                        name="scholarship_name"
+                        value="{{ scholarship.Scholarship_Name }}">
+
+
+                    <input
+                        type="hidden"
+                        name="next"
+                        value="{{ current_url }}">
+
+
+                    <button
+                        type="submit"
+                        class="scholarship-save-button"
+                        title="{% if scholarship.is_saved %}Remove from Saved{% else %}Save Scholarship{% endif %}">
+
+
+                        {% if scholarship.is_saved %}
+
+                            <img
+                                src="{% static 'saved.png' %}"
+                                alt="Saved Scholarship"
+                                class="scholarship-save-icon">
+
+
+                        {% else %}
+
+                            <img
+                                src="{% static 'unsaved.png' %}"
+                                alt="Save Scholarship"
+                                class="scholarship-save-icon">
+
+                        {% endif %}
+
+
+                    </button>
+
+
+                </form>
+
+
+            </div>
+
+        </td>
 
 
                             <td>
