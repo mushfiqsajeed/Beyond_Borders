@@ -339,7 +339,7 @@
             <h2>Study Preferences</h2>
 
             <p>
-                Tell us what and where you want to study.
+                Tell us where and which degree level you want to study.
             </p>
 
 
@@ -424,42 +424,6 @@
 
             </div>
 
-
-            <div class="form-group">
-
-                <label for="field_of_study">
-                    Field of Study
-                </label>
-
-                <input
-                    type="text"
-                    id="field_of_study"
-                    name="field_of_study"
-                    value="{{ field_of_study }}"
-                    placeholder="e.g. Computer Science"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="graduation_year">
-                    Graduation Year
-                </label>
-
-                <input
-                    type="number"
-                    id="graduation_year"
-                    name="graduation_year"
-                    value="{{ graduation_year }}"
-                    min="1900"
-                    max="2100"
-                    placeholder="e.g. 2027"
-                >
-
-            </div>
-
         </div>
 
 
@@ -470,46 +434,42 @@
             <h2>Academic Information</h2>
 
             <p>
-                Enter your current academic performance.
+                Your current CGPA is taken from your profile to evaluate your eligibility. 
+                To update it, please edit your profile.
             </p>
 
 
-            <div class="form-group">
+        <div class="form-group">
 
-                <label for="cgpa">
-                    Current CGPA <span class="required">*</span>
-                </label>
+            <label for="cgpa">
+                Current CGPA
+            </label>
 
-                <input
-                    type="number"
-                    id="cgpa"
-                    name="cgpa"
-                    value="{{ cgpa }}"
-                    min="0"
-                    max="4"
-                    step="0.01"
-                    placeholder="e.g. 3.75"
-                    required
-                >
+            <input
+                type="number"
+                id="cgpa"
+                value="{{ cgpa }}"
+                min="0"
+                max="4"
+                step="0.01"
+                readonly
+            >
 
-                <p class="score-note">
-                    Enter your CGPA on a 4.00 scale.
-                </p>
-
-            </div>
+        </div>
 
         </div>
 
 
-        <!-- English Proficiency -->
+
+ <!-- Standardized Tests -->
 
         <div class="form-section">
 
-            <h2>English Proficiency</h2>
+            <h2>Standardized Tests</h2>
 
             <p>
-                Enter the scores for any English proficiency tests
-                you have taken. Leave tests you have not taken blank.
+                Your test scores are taken from your profile to evaluate your eligibility. 
+                To update them, please update your profile.
             </p>
 
 
@@ -522,12 +482,12 @@
                 <input
                     type="number"
                     id="ielts_score"
-                    name="ielts_score"
                     value="{{ ielts_score }}"
                     min="0"
                     max="9"
                     step="0.5"
-                    placeholder="Leave blank if not taken"
+                    placeholder="Not provided in profile"
+                    readonly
                 >
 
             </div>
@@ -542,11 +502,11 @@
                 <input
                     type="number"
                     id="toefl_score"
-                    name="toefl_score"
                     value="{{ toefl_score }}"
                     min="0"
                     max="120"
-                    placeholder="Leave blank if not taken"
+                    placeholder="Not provided in profile"
+                    readonly
                 >
 
             </div>
@@ -561,29 +521,14 @@
                 <input
                     type="number"
                     id="pte_score"
-                    name="pte_score"
                     value="{{ pte_score }}"
                     min="0"
                     max="90"
-                    placeholder="Leave blank if not taken"
+                    placeholder="Not provided in profile"
+                    readonly
                 >
 
             </div>
-
-        </div>
-
-
-        <!-- Standardized Tests -->
-
-        <div class="form-section">
-
-            <h2>Standardized Tests</h2>
-
-            <p>
-                Enter the scores for any standardized tests
-                you have taken. You can provide multiple scores.
-                Leave the others blank.
-            </p>
 
 
             <div class="score-container">
@@ -595,11 +540,11 @@
                 <input
                     type="number"
                     id="sat_score"
-                    name="sat_score"
                     value="{{ sat_score }}"
                     min="0"
                     max="1600"
-                    placeholder="Leave blank if not taken"
+                    placeholder="Not provided in profile"
+                    readonly
                 >
 
             </div>
@@ -614,11 +559,11 @@
                 <input
                     type="number"
                     id="gre_score"
-                    name="gre_score"
                     value="{{ gre_score }}"
                     min="0"
                     max="340"
-                    placeholder="Leave blank if not taken"
+                    placeholder="Not provided in profile"
+                    readonly
                 >
 
             </div>
@@ -633,17 +578,16 @@
                 <input
                     type="number"
                     id="gmat_score"
-                    name="gmat_score"
                     value="{{ gmat_score }}"
                     min="0"
                     max="805"
-                    placeholder="Leave blank if not taken"
+                    placeholder="Not provided in profile"
+                    readonly
                 >
 
             </div>
 
         </div>
-
 
         <!-- Submit -->
 

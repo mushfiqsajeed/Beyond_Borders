@@ -1,8 +1,67 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db import connection
 
 
 def scholarship_eligibility(request):
+
+    email = request.session.get("student_email")
+
+    if not email:
+        return redirect("login")
+
+    # ------------------------------------------
+    # GET CGPA From Profile
+    # ------------------------------------------
+    
+
+    with connection.cursor() as cursor:
+
+        cursor.execute(
+            """
+            SELECT cgpa
+            FROM Student
+            WHERE Email = %s
+            """,
+            [email]
+        )
+
+        student = cursor.fetchone()
+
+    if student is None:
+        return redirect("login")
+
+    student_cgpa = student[0]
+
+    # ------------------------------------------
+    # GET Standardized Test Scores From Profile
+    # ------------------------------------------
+    
+    with connection.cursor() as cursor:
+
+        cursor.execute(
+            """
+            SELECT Test_Name, Score
+            FROM Standardized_Test
+            WHERE Email = %s
+            """,
+            [email]
+        )
+
+        tests = cursor.fetchall()
+
+        test_scores = {
+            test_name: float(score)
+            for test_name, score in tests
+            if score is not None
+        }
+
+        student_ielts = test_scores.get("IELTS")
+        student_toefl = test_scores.get("TOEFL")
+        student_pte = test_scores.get("PTE")
+
+        student_sat = test_scores.get("SAT")
+        student_gre = test_scores.get("GRE")
+        student_gmat = test_scores.get("GMAT")
 
     # ------------------------------------------
     # GET COUNTRIES
@@ -32,51 +91,27 @@ def scholarship_eligibility(request):
             "scholarship_eligibility.html",
             {
                 "countries": countries,
+
+                "cgpa": student_cgpa,
+
+                "ielts_score": student_ielts,
+                "toefl_score": student_toefl,
+                "pte_score": student_pte,
+
+                "sat_score": student_sat,
+                "gre_score": student_gre,
+                "gmat_score": student_gmat,
+
                 "active_page": "eligibility",
             }
         )
 
     # ------------------------------------------
-    # GET USER INPUT
+    # GET USER INPUT ON FUTURE STUDY PREFERENCES
     # ------------------------------------------
 
     country = request.POST.get("country", "").strip()
     degree_level = request.POST.get("degree_level", "").strip()
-    field_of_study = request.POST.get("field_of_study", "").strip()
-    graduation_year = request.POST.get("graduation_year", "").strip()
-
-    cgpa = request.POST.get("cgpa", "").strip()
-
-    ielts_score = request.POST.get("ielts_score", "").strip()
-    toefl_score = request.POST.get("toefl_score", "").strip()
-    pte_score = request.POST.get("pte_score", "").strip()
-
-    sat_score = request.POST.get("sat_score", "").strip()
-    gre_score = request.POST.get("gre_score", "").strip()
-    gmat_score = request.POST.get("gmat_score", "").strip()
-
-    # ------------------------------------------
-    # CONVERT SCORES
-    # ------------------------------------------
-
-    def to_float(value):
-        if not value:
-            return None
-
-        try:
-            return float(value)
-        except (ValueError, TypeError):
-            return None
-
-    student_cgpa = to_float(cgpa)
-
-    student_ielts = to_float(ielts_score)
-    student_toefl = to_float(toefl_score)
-    student_pte = to_float(pte_score)
-
-    student_sat = to_float(sat_score)
-    student_gre = to_float(gre_score)
-    student_gmat = to_float(gmat_score)
 
     # ------------------------------------------
     # GET SCHOLARSHIPS
