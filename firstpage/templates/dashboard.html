@@ -1,23 +1,594 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beyond Borders</title>
-    <link rel="icon" type="image/png" href="{% static 'Logo_favicon.png' %}">
 
-        <link rel="stylesheet" href="{% static 'style.css' %}">
-    </head>
-    <body style="background-color: #ecf2fe;">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Beyond Borders</title>
+
+    <link rel="icon"
+          type="image/png"
+          href="{% static 'Logo_favicon.png' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'dashboard.css' %}">
+
+</head>
 
 
-        <h1>Welcome to Beyond Borders!</h1>
+<body>
 
-        <h2>Welcome, {{ full_name }} 👋</h2>
+    <!-- =====================================================
+         SIDEBAR TOGGLE BUTTON
+         ===================================================== -->
 
-        <p>You are successfully logged in.</p>
-        
-    </body>
+    <button
+        class="sidebar-toggle"
+        id="sidebar-toggle"
+        type="button"
+        aria-label="Toggle sidebar">
+
+        ☰
+
+    </button>
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <!-- Sidebar Header -->
+
+        <div class="sidebar-header">
+
+            <div class="sidebar-brand">
+
+                <img
+                    src="{% static 'Logo_favicon.png' %}"
+                    alt="Beyond Borders Logo">
+
+                <span class="brand-text">
+                    Beyond Borders
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Dashboard -->
+
+        <a href="#"
+           class="sidebar-link active">
+
+            <span class="sidebar-icon">
+                🏠
+            </span>
+
+            <span class="sidebar-text">
+                Dashboard
+            </span>
+
+        </a>
+
+
+        <!-- Explore Countries -->
+
+        <a href="#"
+           class="sidebar-link">
+
+            <span class="sidebar-icon">
+                🌎
+            </span>
+
+            <span class="sidebar-text">
+                Explore Countries
+            </span>
+
+        </a>
+
+
+        <!-- Explore Universities -->
+
+        <a href="#"
+           class="sidebar-link">
+
+            <span class="sidebar-icon">
+                🎓
+            </span>
+
+            <span class="sidebar-text">
+                Explore University
+            </span>
+
+        </a>
+
+
+        <!-- Explore Scholarships -->
+
+        <a href="#"
+           class="sidebar-link">
+
+            <span class="sidebar-icon">
+                💰
+            </span>
+
+            <span class="sidebar-text">
+                Explore Scholarships
+            </span>
+
+        </a>
+
+
+        <!-- Scholarship Eligibility -->
+
+        <a href="#"
+           class="sidebar-link">
+
+            <span class="sidebar-icon">
+                ✅
+            </span>
+
+            <span class="sidebar-text">
+                Scholarship Eligibility
+            </span>
+
+        </a>
+
+
+        <!-- Admission Requirement -->
+
+        <a href="#"
+           class="sidebar-link">
+
+            <span class="sidebar-icon">
+                📋
+            </span>
+
+            <span class="sidebar-text">
+                Admission Requirement
+            </span>
+
+        </a>
+
+
+        <!-- Cost Estimator -->
+
+        <a href="#"
+           class="sidebar-link">
+
+            <span class="sidebar-icon">
+                🧮
+            </span>
+
+            <span class="sidebar-text">
+                Cost Estimator
+            </span>
+
+        </a>
+
+
+        <!-- Document Review -->
+
+        <a href="#"
+           class="sidebar-link">
+
+            <span class="sidebar-icon">
+                📄
+            </span>
+
+            <span class="sidebar-text">
+                Document Review
+            </span>
+
+        </a>
+
+
+        <!-- Saved -->
+
+        <a href="#"
+           class="sidebar-link">
+
+            <span class="sidebar-icon">
+                🔖
+            </span>
+
+            <span class="sidebar-text">
+                Saved
+            </span>
+
+        </a>
+
+
+        <!-- Profile -->
+
+        <a href="{% url 'profile' %}"
+           class="sidebar-link">
+
+            <span class="sidebar-icon">
+                👤
+            </span>
+
+            <span class="sidebar-text">
+                Profile
+            </span>
+
+        </a>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN DASHBOARD CONTENT
+         ===================================================== -->
+
+    <main class="dashboard-content">
+
+
+        <!-- =================================================
+             TOP BAR
+             ================================================= -->
+
+        <header class="topbar">
+
+            <div></div>
+
+            <div class="topbar-actions">
+
+                <a
+                    href="https://github.com/mushfiqsajeed/Beyond_Borders/blob/main/README.md"
+                    class="about-link"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    About Us
+
+                </a>
+
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="logout-button">
+
+                    Logout
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             WELCOME SECTION
+             ================================================= -->
+
+        <section class="welcome-section">
+
+            <h1>
+                Welcome back, {{ full_name }}! 👋
+            </h1>
+
+            <p>
+                Continue your journey to studying abroad.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             SUMMARY CARDS
+             ================================================= -->
+
+        <section class="summary-cards">
+
+
+            <!-- Profile Completion -->
+
+            <div class="summary-card">
+
+                <div class="card-top">
+
+                    <div>
+
+                        <p class="card-label">
+                            Profile Completion
+                        </p>
+
+                        <h2>{{ profile_completion }}%</h2>
+
+                    </div>
+
+
+                    <div class="card-icon">
+                        👤
+                    </div>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                    <div class="progress-fill"
+                        style="width: {{ profile_completion }}%;">
+                    </div>
+
+                </div>
+
+
+                <a href="{% url 'profile' %}"
+                   class="card-link">
+
+                    Complete Profile →
+
+                </a>
+
+            </div>
+
+
+            <!-- Saved -->
+
+            <div class="summary-card">
+
+                <div class="card-top">
+
+                    <div>
+
+                        <p class="card-label">
+                            Saved Universities
+                        </p>
+
+                        <h2>
+                            0
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-icon">
+                        🔖
+                    </div>
+
+                </div>
+
+
+                <p class="card-description">
+                    Universities you've saved for later.
+                </p>
+
+
+                <a href="#"
+                   class="card-link">
+
+                    View Saved →
+
+                </a>
+
+            </div>
+
+
+            <!-- Scholarships -->
+
+            <div class="summary-card">
+
+                <div class="card-top">
+
+                    <div>
+
+                        <p class="card-label">
+                            Saved Scholarships
+                        </p>
+
+                        <h2>
+                            0
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-icon">
+                        💰
+                    </div>
+
+                </div>
+
+
+                <p class="card-description">
+                    Scholarships you've saved.
+                </p>
+
+
+                <a href="#"
+                   class="card-link">
+
+                    View Saved →
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             QUICK ACTIONS
+             ================================================= -->
+
+        <section class="quick-actions">
+
+            <div class="section-heading">
+
+                <h2>
+                    Quick Actions
+                </h2>
+
+                <p>
+                    Start exploring opportunities that match your goals.
+                </p>
+
+            </div>
+
+
+            <div class="action-grid">
+
+
+                <!-- Countries -->
+
+                <a href="#"
+                   class="action-card">
+
+                    <div class="action-icon">
+                        🌎
+                    </div>
+
+                    <div class="action-content">
+
+                        <h3>
+                            Explore Countries
+                        </h3>
+
+                        <p>
+                            Learn about study destinations,
+                            costs, visas and student life.
+                        </p>
+
+                    </div>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- Universities -->
+
+                <a href="#"
+                   class="action-card">
+
+                    <div class="action-icon">
+                        🎓
+                    </div>
+
+                    <div class="action-content">
+
+                        <h3>
+                            Explore Universities
+                        </h3>
+
+                        <p>
+                            Compare universities, rankings,
+                            tuition fees and more.
+                        </p>
+
+                    </div>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- Scholarships -->
+
+                <a href="#"
+                   class="action-card">
+
+                    <div class="action-icon">
+                        💰
+                    </div>
+
+                    <div class="action-content">
+
+                        <h3>
+                            Explore Scholarships
+                        </h3>
+
+                        <p>
+                            Discover scholarships that match
+                            your academic profile.
+                        </p>
+
+                    </div>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- Eligibility -->
+
+                <a href="#"
+                   class="action-card">
+
+                    <div class="action-icon">
+                        ✅
+                    </div>
+
+                    <div class="action-content">
+
+                        <h3>
+                            Check Scholarship Eligibility
+                        </h3>
+
+                        <p>
+                            Find scholarships you may
+                            qualify for.
+                        </p>
+
+                    </div>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         SIDEBAR JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        const toggleButton =
+            document.getElementById("sidebar-toggle");
+
+
+        toggleButton.addEventListener("click", function () {
+
+            sidebar.classList.toggle("collapsed");
+
+            document.body.classList.toggle(
+                "sidebar-collapsed"
+            );
+
+        });
+
+    </script>
+
+
+</body>
 
 </html>

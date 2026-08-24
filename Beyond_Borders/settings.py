@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'firstpage',
     'explore_countries',
-    'debug_toolbar'
+    'debug_toolbar',
+    'user_profile'
 ]
+
 
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
