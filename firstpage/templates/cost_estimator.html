@@ -1,0 +1,978 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+
+{% block title %}
+
+Cost Estimator | Beyond Borders
+
+{% endblock %}
+
+
+
+
+{% block page_css %}
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+{% endblock %}
+
+
+
+
+
+{% block content %}
+
+
+
+<div class="feature-container">
+
+
+
+
+
+
+
+<!-- HEADER -->
+
+<div class="glass-card feature-header">
+
+
+<span class="feature-badge">
+
+💰 Smart Cost Planning
+
+</span>
+
+
+
+
+<h1>
+
+Study Cost Estimator
+
+</h1>
+
+
+
+
+<p>
+
+Estimate tuition fees, accommodation,
+food and living expenses before choosing your
+study destination.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- INPUT SECTION -->
+
+
+<div class="glass-card">
+
+
+
+<h2>
+
+Calculate Your Study Cost
+
+</h2>
+
+
+
+
+<p>
+
+Choose your preferred university or country
+to estimate your yearly expenses.
+
+</p>
+
+
+
+
+<br>
+
+
+
+
+
+
+<form method="POST">
+
+
+{% csrf_token %}
+
+
+
+
+
+<div class="form-grid">
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Calculation Type
+
+</label>
+
+
+
+
+<select name="calculation_mode">
+
+
+
+<option value="university">
+
+University Based
+
+</option>
+
+
+
+<option value="country">
+
+Country Based
+
+</option>
+
+
+
+</select>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Other Monthly Expenses
+
+</label>
+
+
+
+
+<input
+
+type="number"
+
+name="other_expenses"
+
+placeholder="Enter extra expenses"
+
+>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-grid">
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Select University
+
+</label>
+
+
+
+
+
+<select name="university">
+
+
+
+<option value="">
+
+Choose University
+
+</option>
+
+
+
+
+
+{% for university in universities %}
+
+
+
+<option value="{{ university }}">
+
+{{ university }}
+
+</option>
+
+
+
+
+{% endfor %}
+
+
+
+
+
+</select>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Select Country
+
+</label>
+
+
+
+
+<select name="country">
+
+
+
+<option value="">
+
+Choose Country
+
+</option>
+
+
+
+
+
+{% for country in countries %}
+
+
+
+<option value="{{ country }}">
+
+{{ country }}
+
+</option>
+
+
+
+
+{% endfor %}
+
+
+
+
+
+</select>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<button class="primary-btn">
+
+
+Calculate My Cost
+
+
+</button>
+
+
+
+
+
+
+</form>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+{% if result %}
+
+
+
+
+
+<!-- PREMIUM YEARLY COST CARD -->
+
+
+<div class="glass-card">
+
+
+
+<div class="cost-hero">
+
+
+
+
+<div class="cost-glow"></div>
+
+
+
+
+
+<div class="cost-hero-badge">
+
+
+💰 Estimated Annual Investment
+
+
+</div>
+
+
+
+
+
+
+<div class="cost-amount-wrapper">
+
+
+<span class="currency-symbol">
+
+$
+
+</span>
+
+
+
+<h2 class="cost-hero-amount">
+
+
+{{ result.estimated_yearly_total }}
+
+
+</h2>
+
+
+
+</div>
+
+
+
+
+
+
+<p class="cost-hero-subtext">
+
+
+Complete yearly estimate including tuition,
+accommodation and living expenses
+
+
+</p>
+
+
+
+
+
+<div class="cost-mini-info">
+
+
+<div>
+
+🎓 Tuition
+
+</div>
+
+
+
+<div>
+
+🏠 Living
+
+</div>
+
+
+
+<div>
+
+🌍 Study Abroad
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<!-- CONTINUE IN PART 2 -->
+ <!-- COST DETAILS CARDS -->
+
+
+<div class="card-grid">
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+Tuition Fee
+
+</h3>
+
+
+<div class="value">
+
+
+{{ result.tuition_fee }}
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+Monthly Living
+
+</h3>
+
+
+<div class="value">
+
+
+{{ result.monthly_living_total }}
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+Yearly Living
+
+</h3>
+
+
+<div class="value">
+
+
+{{ result.yearly_living_cost }}
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- EXPENSE BREAKDOWN -->
+
+
+<div class="glass-card">
+
+
+<h2>
+
+Living Cost Breakdown
+
+</h2>
+
+
+
+<br>
+
+
+
+
+
+<div class="card-grid">
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+🏠 Accommodation
+
+</h3>
+
+
+<div class="value">
+
+
+{{ result.monthly_accommodation }}
+
+
+</div>
+
+
+<p>
+
+Monthly cost
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+🍽 Food
+
+</h3>
+
+
+<div class="value">
+
+
+{{ result.monthly_food }}
+
+
+</div>
+
+
+<p>
+
+Monthly grocery cost
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+🚆 Transport
+
+</h3>
+
+
+<div class="value">
+
+
+{{ result.monthly_transport }}
+
+
+</div>
+
+
+<p>
+
+Monthly transport cost
+
+</p>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- DESTINATION INFORMATION -->
+
+
+<div class="glass-card">
+
+
+<h2>
+
+Study Destination Information
+
+</h2>
+
+
+
+<br>
+
+
+
+
+
+<div class="card-grid">
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+🌍 Climate
+
+</h3>
+
+
+<p>
+
+{{ result.climate }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+🏥 Healthcare
+
+</h3>
+
+
+<p>
+
+{{ result.healthcare_info }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+🎓 Student Lifestyle
+
+</h3>
+
+
+<p>
+
+{{ result.student_lifestyle }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- UNIVERSITY DETAILS -->
+
+
+<div class="glass-card">
+
+
+<h2>
+
+University Details
+
+</h2>
+
+
+
+<br>
+
+
+
+
+
+<div class="card-grid">
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+University
+
+</h3>
+
+
+<p>
+
+{{ result.university }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+Country
+
+</h3>
+
+
+<p>
+
+{{ result.country }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="info-card">
+
+
+<h3>
+
+World Ranking
+
+</h3>
+
+
+<p>
+
+{{ result.world_ranking }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+{% endif %}
+
+
+
+
+
+</div>
+
+
+
+{% endblock %}

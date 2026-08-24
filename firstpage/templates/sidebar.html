@@ -1,202 +1,275 @@
 {% load static %}
-<!-- =====================================================
-         SIDEBAR TOGGLE BUTTON
-         ===================================================== -->
 
-    <button
-        class="sidebar-toggle"
-        id="sidebar-toggle"
-        type="button"
-        aria-label="Toggle sidebar">
+<!-- SIDEBAR TOGGLE BUTTON -->
 
-        ☰
+<button
+    class="sidebar-toggle"
+    id="sidebar-toggle"
+    type="button"
+    aria-label="Toggle sidebar">
 
-    </button>
+    ☰
 
-     <!-- =====================================================
-         SIDEBAR
-         ===================================================== -->
+</button>
 
-    <aside class="sidebar" id="sidebar">
 
-        <!-- Sidebar Header -->
 
-        <div class="sidebar-header">
+<!-- SIDEBAR -->
 
-            <div class="sidebar-brand">
+<aside class="sidebar" id="sidebar">
 
-                <img
-                    src="{% static 'Logo_favicon.png' %}"
-                    alt="Beyond Borders Logo">
 
-                <span class="brand-text">
-                    Beyond Borders
-                </span>
+    <!-- Sidebar Header -->
 
-            </div>
+    <div class="sidebar-header">
+
+        <div class="sidebar-brand">
+
+
+            <img
+                src="{% static 'Logo_favicon.png' %}"
+                alt="Beyond Borders Logo">
+
+
+            <span class="brand-text">
+                Beyond Borders
+            </span>
+
 
         </div>
 
-
-        <!-- Dashboard -->
-
-        <a href="{% url 'dashboard' %}"
-            class="sidebar-link {% if active_page == 'dashboard' %}active{% endif %}">
-
-            <span class="sidebar-icon">
-                🏠
-            </span>
-
-            <span class="sidebar-text">
-                Dashboard
-            </span>
-
-        </a>
+    </div>
 
 
-        <!-- Explore Countries -->
-
-        <a href="{% url 'explore_countries' %}"
-            class="sidebar-link {% if active_page == 'countries' %}active{% endif %}">
 
 
-            <span class="sidebar-icon">
-                🌎
-            </span>
 
-            <span class="sidebar-text">
-                Explore Countries
-            </span>
+    <!-- Dashboard -->
 
-        </a>
+    <a
+        href="{% url 'dashboard' %}"
+        class="sidebar-link {% if active_page == 'dashboard' %}active{% endif %}">
 
 
-        <!-- Explore Universities -->
-
-        <a href="{% url 'explore_universities' %}"
-            class="sidebar-link {% if active_page == 'universities' %}active{% endif %}">
-
-            <span class="sidebar-icon">
-                🎓
-            </span>
-
-            <span class="sidebar-text">
-                Explore University
-            </span>
-
-        </a>
+        <span class="sidebar-icon">
+            🏠
+        </span>
 
 
-        <!-- Explore Scholarships -->
-
-        <a href="{% url 'scholarship_list' %}"
-            class="sidebar-link {% if active_page == 'scholarships' %}active{% endif %}">
-
-
-            <span class="sidebar-icon">
-                💰
-            </span>
-
-            <span class="sidebar-text">
-                Explore Scholarships
-            </span>
-
-        </a>
+        <span class="sidebar-text">
+            Dashboard
+        </span>
 
 
-        <!-- Scholarship Eligibility -->
-
-        <a href="{% url 'scholarship_eligibility' %}"
-            class="sidebar-link {% if active_page == 'eligibility' %}active{% endif %}">
-
-            <span class="sidebar-icon">
-                ✅
-            </span>
-
-            <span class="sidebar-text">
-                Scholarship Eligibility
-            </span>
-
-        </a>
+    </a>
 
 
-        <!-- Admission Requirement -->
-
-        <a href="#"
-           class="sidebar-link">
-
-            <span class="sidebar-icon">
-                📋
-            </span>
-
-            <span class="sidebar-text">
-                Admission Requirement
-            </span>
-
-        </a>
 
 
-        <!-- Cost Estimator -->
 
-        <a href="#"
-           class="sidebar-link">
+    <!-- Explore Countries -->
 
-            <span class="sidebar-icon">
-                🧮
-            </span>
-
-            <span class="sidebar-text">
-                Cost Estimator
-            </span>
-
-        </a>
+    <a
+        href="{% url 'explore_countries' %}"
+        class="sidebar-link {% if active_page == 'countries' %}active{% endif %}">
 
 
-        <!-- Document Review -->
-
-        <a href="#"
-           class="sidebar-link">
-
-            <span class="sidebar-icon">
-                📄
-            </span>
-
-            <span class="sidebar-text">
-                Document Review
-            </span>
-
-        </a>
+        <span class="sidebar-icon">
+            🌎
+        </span>
 
 
-        <!-- Saved -->
-
-        <a href="#"
-           class="sidebar-link">
-
-            <span class="sidebar-icon">
-                🔖
-            </span>
-
-            <span class="sidebar-text">
-                Saved
-            </span>
-
-        </a>
+        <span class="sidebar-text">
+            Explore Countries
+        </span>
 
 
-        <!-- Profile -->
+    </a>
 
-        <a href="{% url 'profile' %}"
-            class="sidebar-link {% if active_page == 'profile' %}active{% endif %}">
 
-            <span class="sidebar-icon">
-                👤
-            </span>
 
-            <span class="sidebar-text">
-                Profile
-            </span>
 
-        </a>
 
-    </aside>
+    <!-- Explore Universities -->
+
+    <a
+        href="{% url 'explore_universities' %}"
+        class="sidebar-link {% if active_page == 'universities' %}active{% endif %}">
+
+
+        <span class="sidebar-icon">
+            🎓
+        </span>
+
+
+        <span class="sidebar-text">
+            Explore Universities
+        </span>
+
+
+    </a>
+
+
+
+
+
+    <!-- Explore Scholarships -->
+
+    <a
+        href="{% url 'scholarship_list' %}"
+        class="sidebar-link {% if active_page == 'scholarships' %}active{% endif %}">
+
+
+        <span class="sidebar-icon">
+            💰
+        </span>
+
+
+        <span class="sidebar-text">
+            Explore Scholarships
+        </span>
+
+
+    </a>
+
+
+
+
+
+    <!-- Scholarship Eligibility -->
+
+    <a
+        href="{% url 'scholarship_eligibility' %}"
+        class="sidebar-link {% if active_page == 'eligibility' %}active{% endif %}">
+
+
+        <span class="sidebar-icon">
+            ✅
+        </span>
+
+
+        <span class="sidebar-text">
+            Scholarship Eligibility
+        </span>
+
+
+    </a>
+
+
+
+
+
+    <!-- Admission Requirement Checker -->
+
+    <a
+        href="{% url 'admission_checker' %}"
+        class="sidebar-link {% if active_page == 'admission_checker' %}active{% endif %}">
+
+
+        <span class="sidebar-icon">
+            📋
+        </span>
+
+
+        <span class="sidebar-text">
+            Admission Requirement
+        </span>
+
+
+    </a>
+
+
+
+
+
+    <!-- Cost Estimator -->
+
+    <a
+        href="{% url 'cost_estimator' %}"
+        class="sidebar-link {% if active_page == 'cost_estimator' %}active{% endif %}">
+
+
+        <span class="sidebar-icon">
+            🧮
+        </span>
+
+
+        <span class="sidebar-text">
+            Cost Estimator
+        </span>
+
+
+    </a>
+
+
+
+
+
+    <!-- Document Review -->
+
+    <a
+        href="{% url 'document_review' %}"
+        class="sidebar-link {% if active_page == 'document_review' %}active{% endif %}">
+
+
+        <span class="sidebar-icon">
+            📄
+        </span>
+
+
+        <span class="sidebar-text">
+            Upload Documents
+        </span>
+
+
+    </a>
+
+
+
+
+
+    <!-- Saved -->
+
+    <a
+        href="#"
+        class="sidebar-link">
+
+
+        <span class="sidebar-icon">
+            🔖
+        </span>
+
+
+        <span class="sidebar-text">
+            Saved
+        </span>
+
+
+    </a>
+
+
+
+
+
+    <!-- Profile -->
+
+    <a
+        href="{% url 'profile' %}"
+        class="sidebar-link {% if active_page == 'profile' %}active{% endif %}">
+
+
+        <span class="sidebar-icon">
+            👤
+        </span>
+
+
+        <span class="sidebar-text">
+            Profile
+        </span>
+
+
+    </a>
+
+
+
+</aside>
