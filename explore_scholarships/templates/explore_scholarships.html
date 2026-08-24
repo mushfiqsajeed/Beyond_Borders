@@ -8,6 +8,7 @@
 
     <title>Explore Scholarships</title>
     <link rel="icon" type="image/png" href="{% static 'Logo_favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}">
 
     <style>
         body {
@@ -103,6 +104,8 @@
 </head>
 
 <body>
+
+{% include "sidebar.html" with active_page="scholarships" %}
 
 <div class="container">
 
@@ -232,6 +235,30 @@
     </div>
 
 {% endif %}
+
+<!-- Sidebar JavaScript -->
+
+<script>
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    const toggleButton =
+        document.getElementById("sidebar-toggle");
+
+
+    toggleButton.addEventListener("click", function () {
+
+        sidebar.classList.toggle("collapsed");
+
+        document.body.classList.toggle(
+            "sidebar-collapsed"
+        );
+
+    });
+
+</script>
+<!-- -->
 
 </body>
 </html>

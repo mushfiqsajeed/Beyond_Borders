@@ -12,6 +12,7 @@
     <title>Scholarship Eligibility Checker</title>
 
     <link rel="icon" type="image/png" href="{% static 'Logo_favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}">
 
     <style>
 
@@ -412,6 +413,8 @@
 
 <body>
 
+{% include "sidebar.html" with active_page="eligibility" %}
+
 <div class="container">
 
     <h1>Scholarship Eligibility Checker</h1>
@@ -758,6 +761,29 @@
     </form>
 
 </div>
+
+<!--Javascript-->
+<script>
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    const toggleButton =
+        document.getElementById("sidebar-toggle");
+
+
+    toggleButton.addEventListener("click", function () {
+
+        sidebar.classList.toggle("collapsed");
+
+        document.body.classList.toggle(
+            "sidebar-collapsed"
+        );
+
+    });
+
+</script>
+<!-- -->
 
 </body>
 

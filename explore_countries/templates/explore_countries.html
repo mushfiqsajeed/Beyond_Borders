@@ -7,6 +7,7 @@
 
     <title>Explore Countries</title>
     <link rel="icon" type="image/png" href="{% static 'Logo_favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}">
 
     <style>
         body {
@@ -103,6 +104,8 @@
 
 <body>
 
+{% include "sidebar.html" with active_page="countries" %}
+
 <div class="container">
 
     <h1>Explore Countries</h1>
@@ -188,3 +191,29 @@
 {% endfor %}
 
     </div>
+
+<!-- Javascript-->
+    <script>
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    const toggleButton =
+        document.getElementById("sidebar-toggle");
+
+
+    toggleButton.addEventListener("click", function () {
+
+        sidebar.classList.toggle("collapsed");
+
+        document.body.classList.toggle(
+            "sidebar-collapsed"
+        );
+
+    });
+
+</script>
+<!-- -->
+
+</body>
+</html>
