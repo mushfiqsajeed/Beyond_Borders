@@ -26,4 +26,5 @@ urlpatterns = [
     path("explore-scholarships/", include("explore_scholarships.urls")),
     path("explore-countries/", include("explore_countries.urls")),
     path("profile/", include("user_profile.urls")),
+    path("universities/", include("explore_universities.urls")),
 ]

@@ -1,0 +1,623 @@
+/* =====================================================
+   BEYOND BORDERS - EXPLORE UNIVERSITIES
+   ===================================================== */
+
+
+/* =====================================================
+   PAGE
+   ===================================================== */
+
+.universities-page {
+
+    min-height: 100vh;
+
+    color: #1e293b;
+}
+
+
+
+/* =====================================================
+   MAIN CONTENT
+   ===================================================== */
+
+.universities-content {
+
+    margin-left: 255px;
+
+    min-height: 100vh;
+
+    padding:
+        0 45px 60px;
+
+    background: transparent;
+
+    transition:
+        margin-left 0.3s ease;
+}
+
+
+body.sidebar-collapsed
+.universities-content {
+
+    margin-left: 75px;
+}
+
+
+
+/* =====================================================
+   PAGE HEADING
+   ===================================================== */
+
+.page-heading {
+
+    padding:
+        42px 0 25px;
+}
+
+
+.page-heading h1 {
+
+    margin-bottom: 8px;
+
+    color: #1d2d5c;
+
+    font-size: 34px;
+
+    font-weight: 700;
+}
+
+
+.page-heading p {
+
+    max-width: 750px;
+
+    color: #687a96;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+
+/* =====================================================
+   SEARCH SECTION
+   ===================================================== */
+
+.search-section {
+
+    margin-bottom: 30px;
+}
+
+
+.search-form {
+
+    display: flex;
+
+    gap: 12px;
+
+    max-width: 1000px;
+}
+
+
+.search-bar {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding:
+        14px 16px;
+
+    border:
+        1px solid #cfd8e6;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #1e293b;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    outline: none;
+
+    box-shadow:
+        0 3px 12px
+        rgba(30, 60, 100, 0.05);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.search-bar::placeholder {
+
+    color: #94a3b8;
+}
+
+
+.search-bar:focus {
+
+    border-color: #4e82bf;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(52, 117, 196, 0.12);
+}
+
+
+
+/* =====================================================
+   SEARCH BUTTON
+   ===================================================== */
+
+.search-button {
+
+    padding:
+        0 24px;
+
+    min-height: 48px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #12478d;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.search-button:hover {
+
+    background: #0e376e;
+
+    transform:
+        translateY(-1px);
+}
+
+
+
+/* =====================================================
+   SORT DROPDOWN
+   ===================================================== */
+
+.sort-select {
+
+    min-width: 205px;
+
+    padding:
+        0 14px;
+
+    min-height: 48px;
+
+    border:
+        1px solid #cfd8e6;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #334155;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    outline: none;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 3px 12px
+        rgba(30, 60, 100, 0.05);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.sort-select:hover {
+
+    border-color: #9fb4cf;
+}
+
+
+.sort-select:focus {
+
+    border-color: #4e82bf;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(52, 117, 196, 0.12);
+}
+
+
+
+/* =====================================================
+   UNIVERSITY GRID
+   ===================================================== */
+
+.university-list {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+
+/* =====================================================
+   UNIVERSITY CARD
+   ===================================================== */
+
+.university-card {
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 310px;
+
+    padding:
+        25px;
+
+    background: white;
+
+    border:
+        1px solid #dce3ee;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(30, 60, 100, 0.06);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.university-card:hover {
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 10px 28px
+        rgba(30, 60, 100, 0.11);
+}
+
+
+
+/* =====================================================
+   CARD HEADER
+   ===================================================== */
+
+.university-card-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 18px;
+
+    margin-bottom: 18px;
+
+    border-bottom:
+        1px solid #edf1f6;
+}
+
+
+.university-card-header h2 {
+
+    margin: 0;
+
+    color: #1d2d5c;
+
+    font-size: 20px;
+
+    line-height: 1.4;
+}
+
+
+.ranking-badge {
+
+    flex-shrink: 0;
+
+    padding:
+        6px 11px;
+
+    border-radius: 20px;
+
+    background: #edf3ff;
+
+    color: #2561a8;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+
+/* =====================================================
+   UNIVERSITY INFORMATION
+   ===================================================== */
+
+.university-info {
+
+    flex: 1;
+
+    display: grid;
+
+    gap: 14px;
+}
+
+
+.university-info p {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin: 0;
+
+    color: #52627a;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+.university-info strong {
+
+    color: #334155;
+
+    font-size: 13px;
+}
+
+
+.info-icon {
+
+    width: 24px;
+
+    flex-shrink: 0;
+
+    font-size: 17px;
+
+    text-align: center;
+}
+
+
+
+/* =====================================================
+   OFFICIAL WEBSITE BUTTON
+   ===================================================== */
+
+.details-button {
+
+    display: inline-block;
+
+    align-self: flex-start;
+
+    margin-top: 22px;
+
+    padding:
+        10px 16px;
+
+    border-radius: 8px;
+
+    background: #1f2937;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.details-button:hover {
+
+    background: #111827;
+
+    transform:
+        translateY(-1px);
+}
+
+
+
+/* =====================================================
+   NO RESULTS
+   ===================================================== */
+
+.no-results {
+
+    grid-column:
+        1 / -1;
+
+    padding:
+        40px;
+
+    background: white;
+
+    border:
+        1px solid #dce3ee;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 20px
+        rgba(30, 60, 100, 0.06);
+}
+
+
+.no-results-icon {
+
+    margin-bottom: 12px;
+
+    font-size: 32px;
+}
+
+
+.no-results h2 {
+
+    margin-bottom: 10px;
+
+    color: #1d2d5c;
+
+    font-size: 21px;
+}
+
+
+.no-results p {
+
+    margin-top: 5px;
+
+    color: #687a96;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+
+/* =====================================================
+   RESPONSIVE - TABLET
+   ===================================================== */
+
+@media (max-width: 1000px) {
+
+    .university-list {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVE - SMALL TABLET
+   ===================================================== */
+
+@media (max-width: 800px) {
+
+    .universities-content {
+
+        margin-left: 75px;
+
+        padding-left: 25px;
+
+        padding-right: 25px;
+    }
+
+
+    .search-form {
+
+        flex-direction: column;
+    }
+
+
+    .search-button {
+
+        min-height: 46px;
+    }
+
+
+    .sort-select {
+
+        width: 100%;
+
+        min-height: 46px;
+    }
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVE - MOBILE
+   ===================================================== */
+
+@media (max-width: 550px) {
+
+    .universities-content {
+
+        padding:
+            0 18px 40px;
+    }
+
+
+    .page-heading {
+
+        padding-top: 30px;
+    }
+
+
+    .page-heading h1 {
+
+        font-size: 27px;
+    }
+
+
+    .university-card {
+
+        padding: 20px;
+    }
+
+
+    .university-card-header {
+
+        flex-direction: column;
+    }
+
+
+    .ranking-badge {
+
+        align-self: flex-start;
+    }
+
+}

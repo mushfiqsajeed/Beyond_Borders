@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'explore_scholarships',
     'explore_countries',
     'debug_toolbar',
-    'user_profile'
+    'user_profile',
+    "explore_universities",
 ]
 
 

@@ -1,0 +1,343 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+    Explore Universities | Beyond Borders
+{% endblock %}
+
+
+{% block page_css %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'universities.css' %}">
+
+{% endblock %}
+
+
+{% block body_class %}
+universities-page
+{% endblock %}
+
+
+{% block main_class %}
+universities-content
+{% endblock %}
+
+
+{% block content %}
+
+
+    <!-- =====================================================
+         PAGE HEADING
+         ===================================================== -->
+
+    <section class="page-heading">
+
+        <h1>
+            Explore Universities
+        </h1>
+
+        <p>
+            Discover universities around the world and compare
+            tuition fees, rankings, deadlines, and locations.
+        </p>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SEARCH
+         ===================================================== -->
+
+    <section class="search-section">
+
+        <form
+            method="GET"
+            class="search-form">
+
+
+            <input
+                type="text"
+                name="search"
+                class="search-bar"
+                placeholder="Search by university or country..."
+                value="{{ search }}">
+
+
+            <button
+                type="submit"
+                class="search-button">
+
+                🔍 Search
+
+            </button>
+
+
+            <select
+                name="sort_by"
+                class="sort-select"
+                onchange="this.form.submit()">
+
+
+                <option
+                    value="ranking"
+                    {% if sort_by == "ranking" %}
+                        selected
+                    {% endif %}>
+
+                    🏆 Best Ranking
+
+                </option>
+
+
+                <option
+                    value="lowest_cost"
+                    {% if sort_by == "lowest_cost" %}
+                        selected
+                    {% endif %}>
+
+                    💰 Lowest Cost
+
+                </option>
+
+
+                <option
+                    value="highest_cost"
+                    {% if sort_by == "highest_cost" %}
+                        selected
+                    {% endif %}>
+
+                    💰 Highest Cost
+
+                </option>
+
+
+                <option
+                    value="earliest_deadline"
+                    {% if sort_by == "earliest_deadline" %}
+                        selected
+                    {% endif %}>
+
+                    📅 Earliest Deadline
+
+                </option>
+
+
+                <option
+                    value="latest_deadline"
+                    {% if sort_by == "latest_deadline" %}
+                        selected
+                    {% endif %}>
+
+                    📅 Latest Deadline
+
+                </option>
+
+
+            </select>
+
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         UNIVERSITY CARDS
+         ===================================================== -->
+
+    <section class="university-list">
+
+
+        {% for university in universities %}
+
+
+            <article class="university-card">
+
+
+                <!-- =========================================
+                     CARD HEADER
+                     ========================================= -->
+
+                <div class="university-card-header">
+
+
+                    <h2>
+                        {{ university.university_name }}
+                    </h2>
+
+
+                    <span class="ranking-badge">
+
+                        Rank #{{ university.world_ranking }}
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- =========================================
+                     UNIVERSITY INFORMATION
+                     ========================================= -->
+
+                <div class="university-info">
+
+
+                    <p>
+
+                        <span class="info-icon">
+                            🌍
+                        </span>
+
+                        <span>
+
+                            <strong>
+                                Country
+                            </strong>
+
+                            <br>
+
+                            {{ university.country_name }}
+
+                        </span>
+
+                    </p>
+
+
+
+                    <p>
+
+                        <span class="info-icon">
+                            💰
+                        </span>
+
+                        <span>
+
+                            <strong>
+                                Tuition Fee
+                            </strong>
+
+                            <br>
+
+                            ${{ university.tuition_fee }}
+
+                        </span>
+
+                    </p>
+
+
+
+                    <p>
+
+                        <span class="info-icon">
+                            📅
+                        </span>
+
+                        <span>
+
+                            <strong>
+                                Application Deadline
+                            </strong>
+
+                            <br>
+
+                            {{ university.application_deadline|date:"F j, Y" }}
+
+                        </span>
+
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- =========================================
+                     OFFICIAL WEBSITE
+                     ========================================= -->
+
+                {% if university.website_url %}
+
+                    <a
+                        href="{{ university.website_url }}"
+                        class="details-button"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        Visit Official Website →
+
+                    </a>
+
+                {% endif %}
+
+
+            </article>
+
+
+        {% empty %}
+
+
+            <!-- =============================================
+                 NO RESULTS
+                 ============================================= -->
+
+            {% if search %}
+
+
+                <div class="no-results">
+
+                    <div class="no-results-icon">
+                        🔎
+                    </div>
+
+                    <h2>
+                        University not found
+                    </h2>
+
+                    <p>
+                        We couldn't find any university matching
+                        "{{ search }}".
+                    </p>
+
+                    <p>
+                        Try searching by another university
+                        name or country.
+                    </p>
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="no-results">
+
+                    <h2>
+                        No universities available
+                    </h2>
+
+                    <p>
+                        There are currently no universities
+                        in the database.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        {% endfor %}
+
+
+    </section>
+
+
+{% endblock %}
