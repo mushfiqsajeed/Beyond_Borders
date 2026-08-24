@@ -1,220 +1,478 @@
+{% extends "base.html" %}
+
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Explore Scholarships</title>
-    <link rel="icon" type="image/png" href="{% static 'Logo_favicon.png' %}">
-    <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+{% block title %}
+    Explore Scholarships
+{% endblock %}
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 40px;
 
-            background-image: url("{% static 'background_image_worldMap.jpg' %}");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
+{% block page_css %}
+
+<style>
+
+    /* =====================================================
+       MAIN CONTENT
+       ===================================================== */
+
+    .explore-scholarships-content {
+
+        margin-left: 255px;
+
+        min-height: 100vh;
+
+        padding: 0 45px 60px;
+
+        background: transparent;
+
+        transition:
+            margin-left 0.3s ease;
+    }
+
+
+    body.sidebar-collapsed
+    .explore-scholarships-content {
+
+        margin-left: 75px;
+    }
+
+
+
+    /* =====================================================
+       SCHOLARSHIP PAGE
+       ===================================================== */
+
+    .container {
+
+        max-width: 1200px;
+
+        margin: auto;
+    }
+
+
+    h1 {
+
+        margin-bottom: 8px;
+    }
+
+
+    .intro {
+
+        color: #666;
+
+        margin-bottom: 25px;
+    }
+
+
+    .search-bar {
+
+        width: 100%;
+
+        padding: 14px;
+
+        font-size: 16px;
+
+        border: 1px solid #ccc;
+
+        border-radius: 8px;
+
+        box-sizing: border-box;
+
+        margin-bottom: 20px;
+    }
+
+
+    .filters {
+
+        display: flex;
+
+        gap: 15px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .filter {
+
+        padding: 12px;
+
+        border: 1px solid #ccc;
+
+        border-radius: 8px;
+
+        font-size: 15px;
+
+        background-color: white;
+    }
+
+
+    .results-count {
+
+        margin-bottom: 15px;
+
+        color: #666;
+    }
+
+
+    .table-container {
+
+        background: white;
+
+        border-radius: 12px;
+
+        box-shadow:
+            0 2px 8px rgba(0, 0, 0, 0.08);
+
+        overflow-x: auto;
+    }
+
+
+    table {
+
+        width: 100%;
+
+        border-collapse: collapse;
+    }
+
+
+    th,
+    td {
+
+        padding: 16px;
+
+        text-align: left;
+
+        border-bottom:
+            1px solid #eee;
+    }
+
+
+    th {
+
+        background-color: #f3f4f6;
+
+        font-weight: bold;
+    }
+
+
+    tr:last-child td {
+
+        border-bottom: none;
+    }
+
+
+    .no-results {
+
+        background: white;
+
+        padding: 30px;
+
+        text-align: center;
+
+        border-radius: 12px;
+    }
+
+
+
+    /* =====================================================
+       TABLET
+       ===================================================== */
+
+    @media (max-width: 900px) {
+
+        .explore-scholarships-content {
+
+            margin-left: 75px;
+
+            padding-left: 25px;
+
+            padding-right: 25px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: auto;
+    }
+
+
+
+    /* =====================================================
+       MOBILE
+       ===================================================== */
+
+    @media (max-width: 500px) {
+
+        .explore-scholarships-content {
+
+            padding: 0 18px 40px;
         }
 
-        h1 {
-            margin-bottom: 8px;
+
+        .about-link {
+
+            display: none;
         }
 
-        .intro {
-            color: #666;
-            margin-bottom: 25px;
-        }
-
-        .search-bar {
-            width: 100%;
-            padding: 14px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-sizing: border-box;
-            margin-bottom: 20px;
-        }
 
         .filters {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
+
+            flex-direction: column;
         }
+
 
         .filter {
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 15px;
-            background-color: white;
-        }
 
-        .results-count {
-            margin-bottom: 15px;
-            color: #666;
-        }
-
-        .table-container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            overflow-x: auto;
-        }
-
-        table {
             width: 100%;
-            border-collapse: collapse;
         }
 
-        th,
-        td {
-            padding: 16px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
+    }
 
-        th {
-            background-color: #f3f4f6;
-            font-weight: bold;
-        }
+</style>
 
-        tr:last-child td {
-            border-bottom: none;
-        }
+{% endblock %}
 
-        .no-results {
-            background: white;
-            padding: 30px;
-            text-align: center;
-            border-radius: 12px;
-        }
-    </style>
-</head>
 
-<body>
 
-{% include "sidebar.html" with active_page="scholarships" %}
+{% block main_class %}
+
+    explore-scholarships-content
+
+{% endblock %}
+
+
+
+{% block content %}
+
 
 <div class="container">
 
-    <h1>Explore Scholarships</h1>
+    <h1>
+        Explore Scholarships
+    </h1>
+
 
     <p class="intro">
-        Find scholarships and funding opportunities for international students.
+
+        Find scholarships and funding opportunities
+        for international students.
+
     </p>
 
-    <!-- Search -->
-<form method="GET">
 
-    <input
-        type="text"
-        name="search"
-        class="search-bar"
-        placeholder="Search scholarship name or university..."
-        value="{{ search }}"
-    >
 
-    <div class="filters">
+    <!-- =================================================
+         SEARCH AND FILTERS
+         ================================================= -->
 
-        <select
-            name="country"
-            class="filter"
-            onchange="this.form.submit()"
+    <form method="GET">
+
+        <input
+            type="text"
+            name="search"
+            class="search-bar"
+            placeholder="Search scholarship name or university..."
+            value="{{ search }}"
         >
-            <option value="">Filter By Countries</option>
 
-            {% for c in countries %}
-                <option
-                    value="{{ c }}"
-                    {% if country == c %}selected{% endif %}
-                >
-                    {{ c }}
+
+        <div class="filters">
+
+            <!-- Country Filter -->
+
+            <select
+                name="country"
+                class="filter"
+                onchange="this.form.submit()">
+
+                <option value="">
+                    Filter By Countries
                 </option>
-            {% endfor %}
-        </select>
 
-        <select
-            name="amount"
-            class="filter"
-            onchange="this.form.submit()"
-        >
-            <option value="">Filter By Amounts</option>
 
-            <option value="under_10000"
-                {% if amount == "under_10000" %}selected{% endif %}>
-                Under $10,000
-            </option>
+                {% for c in countries %}
 
-            <option value="10000_25000"
-                {% if amount == "10000_25000" %}selected{% endif %}>
-                $10,000 - $25,000
-            </option>
+                    <option
+                        value="{{ c }}"
+                        {% if country == c %}
+                            selected
+                        {% endif %}>
 
-            <option value="25000_50000"
-                {% if amount == "25000_50000" %}selected{% endif %}>
-                $25,000 - $50,000
-            </option>
+                        {{ c }}
 
-            <option value="over_50000"
-                {% if amount == "over_50000" %}selected{% endif %}>
-                Over $50,000
-            </option>
+                    </option>
 
-        </select>
+                {% endfor %}
 
-    </div>
+            </select>
 
-</form>
+
+
+            <!-- Amount Filter -->
+
+            <select
+                name="amount"
+                class="filter"
+                onchange="this.form.submit()">
+
+                <option value="">
+                    Filter By Amounts
+                </option>
+
+
+                <option
+                    value="under_10000"
+                    {% if amount == "under_10000" %}
+                        selected
+                    {% endif %}>
+
+                    Under $10,000
+
+                </option>
+
+
+                <option
+                    value="10000_25000"
+                    {% if amount == "10000_25000" %}
+                        selected
+                    {% endif %}>
+
+                    $10,000 - $25,000
+
+                </option>
+
+
+                <option
+                    value="25000_50000"
+                    {% if amount == "25000_50000" %}
+                        selected
+                    {% endif %}>
+
+                    $25,000 - $50,000
+
+                </option>
+
+
+                <option
+                    value="over_50000"
+                    {% if amount == "over_50000" %}
+                        selected
+                    {% endif %}>
+
+                    Over $50,000
+
+                </option>
+
+            </select>
+
+        </div>
+
+    </form>
+
+
+
+    <!-- =================================================
+         RESULTS COUNT
+         ================================================= -->
 
     <p class="results-count">
+
         {{ scholarships|length }} scholarships found
+
     </p>
 
+
+
+    <!-- =================================================
+         SCHOLARSHIP RESULTS
+         ================================================= -->
+
     {% if scholarships %}
+
 
         <div class="table-container">
 
             <table>
 
                 <thead>
+
                     <tr>
-                        <th>Scholarship Name</th>
-                        <th>University</th>
-                        <th>Country</th>
-                        <th>Degree Level</th>
-                        <th>Amount</th>
-                        <th>Minimum CGPA</th>
-                        <th>Application Deadline</th>
+
+                        <th>
+                            Scholarship Name
+                        </th>
+
+                        <th>
+                            University
+                        </th>
+
+                        <th>
+                            Country
+                        </th>
+
+                        <th>
+                            Degree Level
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Minimum CGPA
+                        </th>
+
+                        <th>
+                            Application Deadline
+                        </th>
+
                     </tr>
+
                 </thead>
 
+
                 <tbody>
+
 
                     {% for scholarship in scholarships %}
 
                         <tr>
-                            <td>{{ scholarship.Scholarship_Name }}</td>
-                            <td>{{ scholarship.university_name }}</td>
-                            <td>{{ scholarship.country_name }}</td>
-                            <td>{{ scholarship.Degree_level }}</td>
-                            <td>${{ scholarship.Amount|floatformat:2 }}</td>
-                            <td>{{ scholarship.Minimum_cgpa }}</td>
-                            <td>{{ scholarship.Application_deadline }}</td>
+
+                            <td>
+                                {{ scholarship.Scholarship_Name }}
+                            </td>
+
+
+                            <td>
+                                {{ scholarship.university_name }}
+                            </td>
+
+
+                            <td>
+                                {{ scholarship.country_name }}
+                            </td>
+
+
+                            <td>
+                                {{ scholarship.Degree_level }}
+                            </td>
+
+
+                            <td>
+                                ${{ scholarship.Amount|floatformat:2 }}
+                            </td>
+
+
+                            <td>
+                                {{ scholarship.Minimum_cgpa }}
+                            </td>
+
+
+                            <td>
+                                {{ scholarship.Application_deadline }}
+                            </td>
+
                         </tr>
 
                     {% endfor %}
+
 
                 </tbody>
 
@@ -222,43 +480,42 @@
 
         </div>
 
-{% else %}
 
-    <div class="no-results">
-        <p>No scholarships found.</p>
-
-        {% if search or country or amount %}
-            <p>Try changing your search or filters.</p>
-        {% else %}
-            <p>There are currently no scholarships available.</p>
-        {% endif %}
-    </div>
-
-{% endif %}
-
-<!-- Sidebar JavaScript -->
-
-<script>
-
-    const sidebar =
-        document.getElementById("sidebar");
-
-    const toggleButton =
-        document.getElementById("sidebar-toggle");
+    {% else %}
 
 
-    toggleButton.addEventListener("click", function () {
+        <!-- =================================================
+             NO RESULTS
+             ================================================= -->
 
-        sidebar.classList.toggle("collapsed");
+        <div class="no-results">
 
-        document.body.classList.toggle(
-            "sidebar-collapsed"
-        );
+            <p>
+                No scholarships found.
+            </p>
 
-    });
 
-</script>
-<!-- -->
+            {% if search or country or amount %}
 
-</body>
-</html>
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+            {% else %}
+
+                <p>
+                    There are currently no scholarships available.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+{% endblock %}

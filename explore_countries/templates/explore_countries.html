@@ -1,219 +1,376 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Explore Countries</title>
-    <link rel="icon" type="image/png" href="{% static 'Logo_favicon.png' %}">
-    <link rel="stylesheet" href="{% static 'dashboard.css' %}">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 40px;
+{% block title %}
+    Explore Countries | Beyond Borders
+{% endblock %}
 
-            background-image: url("{% static 'background_image_worldMap.jpg' %}");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-}
 
-        .container {
-            max-width: 1100px;
-            margin: auto;
+{% block page_css %}
+
+<style>
+
+    /* =====================================================
+   MAIN CONTENT
+   ===================================================== */
+
+    .explore-countries-content {
+
+        margin-left: 255px;
+
+        min-height: 100vh;
+
+        padding: 0 45px 60px;
+
+        background: transparent;
+
+        transition:
+            margin-left 0.3s ease;
+    }
+
+
+    body.sidebar-collapsed
+    .explore-countries-content {
+
+        margin-left: 75px;
+    }
+
+    /* =====================================================
+   COUNTRY PAGE
+   ===================================================== */
+
+    .container {
+        max-width: 1100px;
+        margin: auto;
+    }
+
+
+    h1 {
+        margin-bottom: 8px;
+    }
+
+
+    .intro {
+        color: #666;
+        margin-bottom: 25px;
+    }
+
+
+    .search-bar {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+
+        border: 1px solid #ccc;
+        border-radius: 8px;
+
+        box-sizing: border-box;
+
+        margin-bottom: 30px;
+    }
+
+
+    .country-list {
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                auto-fit,
+                minmax(280px, 1fr)
+            );
+
+        gap: 20px;
+    }
+
+
+    .country-card {
+        background: white;
+
+        padding: 20px;
+
+        border-radius: 12px;
+
+        box-shadow:
+            0 2px 8px
+            rgba(0, 0, 0, 0.08);
+    }
+
+
+    .country-card h2 {
+        margin-top: 0;
+    }
+
+
+    .country-card p {
+        margin: 8px 0;
+    }
+
+
+    .details-button {
+        display: inline-block;
+
+        padding: 10px 16px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: bold;
+
+        margin-top: 15px;
+        margin-right: 8px;
+
+        background-color: #1f2937;
+
+        color: white;
+    }
+
+
+    .no-results {
+        background: white;
+
+        padding: 30px;
+
+        border-radius: 12px;
+
+        text-align: center;
+
+        box-shadow:
+            0 2px 8px
+            rgba(0, 0, 0, 0.08);
+
+        grid-column: 1 / -1;
+    }
+
+
+    .no-results h2 {
+        margin-top: 0;
+    }
+
+
+    .no-results p {
+        color: #666;
+
+        line-height: 1.6;
+    }
+
+    /* =====================================================
+   TABLET
+   ===================================================== */
+
+    @media (max-width: 900px) {
+
+        .explore-countries-content {
+
+            margin-left: 75px;
+
+            padding-left: 25px;
+            padding-right: 25px;
         }
 
-        h1 {
-            margin-bottom: 8px;
+    }
+
+    /* =====================================================
+   MOBILE
+   ===================================================== */
+
+    @media (max-width: 500px) {
+
+        .explore-countries-content {
+
+            padding: 0 18px 40px;
         }
 
-        .intro {
-            color: #666;
-            margin-bottom: 25px;
+        .about-link {
+            display: none;
         }
 
-        .search-bar {
-            width: 100%;
-            padding: 14px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-sizing: border-box;
-            margin-bottom: 30px;
-        }
+    }
 
-        .country-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+</style>
 
-        .country-card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
+{% endblock %}
 
-        .country-card h2 {
-            margin-top: 0;
-        }
 
-        .country-card p {
-            margin: 8px 0;
-        }
+{% block body_class %}
+explore-countries-page
+{% endblock %}
 
-        .details-button{
-            display: inline-block;
-            padding: 10px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 15px;
-            margin-right: 8px;
-        }
 
-        .details-button {
-            background-color: #1f2937;
-            color: white;
-        }
+{% block main_class %}
+explore-countries-content
+{% endblock %}
 
-        .no-results {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            grid-column: 1 / -1;
-        }
 
-        .no-results h2 {
-            margin-top: 0;
-        }
+{% block content %}
 
-        .no-results p {
-            color: #666;
-            line-height: 1.6;
-        }
-    </style>
-</head>
-
-<body>
-
-{% include "sidebar.html" with active_page="countries" %}
 
 <div class="container">
 
-    <h1>Explore Countries</h1>
+    <!-- =====================================================
+         PAGE HEADING
+         ===================================================== -->
+
+    <h1>
+        Explore Countries
+    </h1>
+
 
     <p class="intro">
-        Explore countries and learn about the costs, lifestyle, visa information,
-        and opportunities available to international students.
+        Explore countries and learn about the costs, lifestyle,
+        visa information, and opportunities available to
+        international students.
     </p>
 
-<form method="GET">
 
-    <input
-        type="text"
-        name="search"
-        class="search-bar"
-        placeholder="Search for a country..."
-        value="{{ search }}"
-    >
 
-</form>
+    <!-- =====================================================
+         COUNTRY SEARCH
+         ===================================================== -->
+
+    <form method="GET">
+
+        <input
+            type="text"
+            name="search"
+            class="search-bar"
+            placeholder="Search for a country..."
+            value="{{ search }}"
+        >
+
+    </form>
+
+
+
+    <!-- =====================================================
+         COUNTRY LIST
+         ===================================================== -->
 
     <div class="country-list">
 
+
         {% for country in countries %}
+
+
+            <!-- =================================================
+                 COUNTRY CARD
+                 ================================================= -->
 
             <div class="country-card">
 
-            <h2>{{ country.country_name }}</h2>
 
-            <p>
-                <strong>Climate:</strong>
-                {{ country.climate }}
-            </p>
+                <h2>
+                    {{ country.country_name }}
+                </h2>
 
-            <p>
-                <strong>Student Lifestyle:</strong>
-                {{ country.student_lifestyle }}
-            </p>
 
-            <p>
-                <strong>Accommodation:</strong>
-                ${{ country.accommodation_cost }}
-            </p>
+                <p>
+                    <strong>
+                        Climate:
+                    </strong>
 
-            <p>
-                <strong>Groceries:</strong>
-                ${{ country.grocery_cost }}
-            </p>
+                    {{ country.climate }}
+                </p>
 
-            <p>
-                <strong>Transportation:</strong>
-                ${{ country.transportation_cost }}
-            </p>
 
-            <a href="{% url 'country_detail' country.country_name %}" class="details-button">
-                View Country Details
-            </a>
+                <p>
+                    <strong>
+                        Student Lifestyle:
+                    </strong>
 
-        </div>
+                    {{ country.student_lifestyle }}
+                </p>
 
-{% empty %}
 
-    {% if search %}
+                <p>
+                    <strong>
+                        Accommodation:
+                    </strong>
 
-        <div class="no-results">
-            <h2>Country not found</h2>
+                    ${{ country.accommodation_cost }}
+                </p>
 
-            <p>
-                We couldn't find "{{ search }}" in our country database.
-            </p>
 
-            <p>
-                Try checking the spelling or search for another country.
-            </p>
-        </div>
+                <p>
+                    <strong>
+                        Groceries:
+                    </strong>
 
-    {% else %}
+                    ${{ country.grocery_cost }}
+                </p>
 
-        <p>No countries available.</p>
 
-    {% endif %}
+                <p>
+                    <strong>
+                        Transportation:
+                    </strong>
 
-{% endfor %}
+                    ${{ country.transportation_cost }}
+                </p>
+
+
+                <a
+                    href="{% url 'country_detail' country.country_name %}"
+                    class="details-button">
+
+                    View Country Details
+
+                </a>
+
+
+            </div>
+
+
+        {% empty %}
+
+
+            {% if search %}
+
+
+                <!-- =================================================
+                     NO SEARCH RESULTS
+                     ================================================= -->
+
+                <div class="no-results">
+
+                    <h2>
+                        Country not found
+                    </h2>
+
+
+                    <p>
+                        We couldn't find "{{ search }}"
+                        in our country database.
+                    </p>
+
+
+                    <p>
+                        Try checking the spelling or search
+                        for another country.
+                    </p>
+
+                </div>
+
+
+            {% else %}
+
+
+                <p>
+                    No countries available.
+                </p>
+
+
+            {% endif %}
+
+
+        {% endfor %}
+
 
     </div>
 
-<!-- Javascript-->
-    <script>
 
-    const sidebar =
-        document.getElementById("sidebar");
-
-    const toggleButton =
-        document.getElementById("sidebar-toggle");
+</div>
 
 
-    toggleButton.addEventListener("click", function () {
-
-        sidebar.classList.toggle("collapsed");
-
-        document.body.classList.toggle(
-            "sidebar-collapsed"
-        );
-
-    });
-
-</script>
-<!-- -->
-
-</body>
-</html>
+{% endblock %}
