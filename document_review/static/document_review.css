@@ -1,0 +1,306 @@
+/* =====================================================
+   BEYOND BORDERS - DOCUMENT REVIEW
+   ===================================================== */
+
+
+/* =====================================================
+   FEATURE CONTAINER
+   ===================================================== */
+
+.feature-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* =====================================================
+   GLASS CARDS
+   ===================================================== */
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #dce3ee;
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 25px rgba(30, 60, 100, 0.06);
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.feature-header {
+    padding: 35px;
+}
+
+.feature-badge {
+    display: inline-block;
+    padding: 8px 14px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    background: #edf3ff;
+    color: #12519b;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.feature-header h1 {
+    margin-bottom: 10px;
+    color: #1d2d5c;
+    font-size: 32px;
+}
+
+.feature-header p {
+    color: #657895;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   HEADINGS
+   ===================================================== */
+
+.glass-card h2 {
+    margin-bottom: 8px;
+    color: #1d2d5c;
+    font-size: 24px;
+}
+
+.glass-card > p {
+    color: #657895;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   UPLOAD AREA
+   ===================================================== */
+
+.upload-box {
+    margin-top: 25px;
+    padding: 35px 25px;
+    text-align: center;
+    border: 2px dashed #b9cce7;
+    border-radius: 15px;
+    background: #f7faff;
+}
+
+.upload-icon {
+    margin-bottom: 10px;
+    font-size: 42px;
+}
+
+.upload-box h3 {
+    margin-bottom: 8px;
+    color: #1d2d5c;
+}
+
+.upload-box p {
+    margin-bottom: 20px;
+    color: #657895;
+    font-size: 14px;
+}
+
+.upload-box input[type="file"] {
+    max-width: 100%;
+}
+
+
+/* =====================================================
+   DOCUMENT TYPES
+   ===================================================== */
+
+.document-types {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 22px;
+}
+
+
+/* =====================================================
+   CARD GRID
+   ===================================================== */
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+
+/* =====================================================
+   INFO CARDS
+   ===================================================== */
+
+.info-card {
+    padding: 20px;
+    background: white;
+    border: 1px solid #dbe7ff;
+    border-radius: 14px;
+}
+
+.info-card h3 {
+    margin-bottom: 8px;
+    color: #1d2d5c;
+    font-size: 17px;
+}
+
+.info-card p {
+    margin-bottom: 7px;
+    color: #657895;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.info-card strong {
+    color: #1d2d5c;
+}
+
+
+/* =====================================================
+   EXPERT CARDS
+   ===================================================== */
+
+.expert-card {
+    transition:
+        border 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.expert-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(30, 60, 100, 0.08);
+}
+
+
+/* =====================================================
+   BUTTON
+   ===================================================== */
+
+.primary-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 11px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #12478d;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.primary-btn:hover {
+    background: #0e376e;
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   REVIEW SUMMARY
+   ===================================================== */
+
+#uploaded_files,
+#selected_expert_text {
+    word-break: break-word;
+}
+
+
+/* =====================================================
+   SUCCESS MESSAGE
+   ===================================================== */
+
+.success-card {
+    border-left: 5px solid #2e8b57;
+}
+
+.status {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.status-success {
+    background: #e8f7ee;
+    color: #247044;
+}
+
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+
+@media (max-width: 1000px) {
+
+    .document-types {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .feature-header h1 {
+        font-size: 26px;
+    }
+
+    .document-types,
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .glass-card {
+        padding: 20px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .feature-header {
+        padding: 25px 20px;
+    }
+
+    .feature-header h1 {
+        font-size: 23px;
+    }
+
+}
+
+/* =====================================================
+   DOCUMENT REVIEW - SIDEBAR LAYOUT FIX
+   ===================================================== */
+
+body.document-review-page > main.dashboard-content {
+    margin-left: 255px !important;
+    width: auto !important;
+    min-height: 100vh;
+    transition: margin-left 0.3s ease;
+}
+
+body.document-review-page.sidebar-collapsed > main.dashboard-content {
+    margin-left: 75px !important;
+}
+
+.feature-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}

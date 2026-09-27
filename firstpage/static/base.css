@@ -281,6 +281,35 @@ body.sidebar-collapsed
 .sidebar-toggle {
 
     left: 75px;
+
+}
+
+
+
+/* =====================================================
+   MAIN CONTENT OFFSET
+   ===================================================== */
+
+.dashboard-content {
+
+    margin-left: 255px;
+
+    min-height: 100vh;
+
+    padding:
+        0 45px 60px;
+
+    background: transparent;
+
+    transition:
+        margin-left 0.3s ease;
+}
+
+
+body.sidebar-collapsed
+.dashboard-content {
+
+    margin-left: 75px;
 }
 
 
@@ -365,6 +394,31 @@ body.sidebar-collapsed
         translateY(-1px);
 }
 
+/* =====================================================
+   SHARED MAIN CONTENT LAYOUT
+   ===================================================== */
+
+.dashboard-content {
+
+    margin-left: 255px;
+
+    min-height: 100vh;
+
+    padding:
+        0 45px 60px;
+
+    background: transparent;
+
+    transition:
+        margin-left 0.3s ease;
+}
+
+
+body.sidebar-collapsed
+.dashboard-content {
+
+    margin-left: 75px;
+}
 
 
 /* =====================================================
@@ -395,6 +449,16 @@ body.sidebar-collapsed
     .sidebar-toggle {
 
         left: 75px;
+
+    }
+
+    .dashboard-content {
+
+        margin-left: 75px;
+
+        padding-left: 25px;
+
+        padding-right: 25px;
     }
 
 }
@@ -411,6 +475,13 @@ body.sidebar-collapsed
     .about-link {
 
         display: none;
+    }
+
+    .dashboard-content {
+
+        padding:
+            0 18px 40px;
+
     }
 
 }

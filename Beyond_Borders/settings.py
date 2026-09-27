@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'user_profile',
     'explore_universities',
     'saved_items',
+    'admission_checker',
+    'cost_estimator',
+    'document_review',
 ]
 
 

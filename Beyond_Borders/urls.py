@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 import debug_toolbar
 
+from cost_estimator import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
@@ -28,4 +30,7 @@ urlpatterns = [
     path("profile/", include("user_profile.urls")),
     path("universities/", include("explore_universities.urls")),
     path("saved/", include("saved_items.urls")),
+    path("admission-checker/", include("admission_checker.urls")),
+    path("cost-estimator/", include("cost_estimator.urls")),
+    path("document-review/", include("document_review.urls")),
 ]
