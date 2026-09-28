@@ -17,12 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import debug_toolbar
+from django.conf import settings
 
 from cost_estimator import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('__debug__/', include(debug_toolbar.urls)),
     path('', include('firstpage.urls')),
     path("scholarship-eligibility/", include("scholarship_eligibility.urls")),
     path("explore-scholarships/", include("explore_scholarships.urls")),
@@ -34,3 +34,9 @@ urlpatterns = [
     path("cost-estimator/", include("cost_estimator.urls")),
     path("document-review/", include("document_review.urls")),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ]
